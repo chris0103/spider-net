@@ -9,19 +9,25 @@ digraph reactive {
 		label = "animal admin";
 		style = filled;
 		color = grey90;
-		AdminPublisher [label = "{<f0>AdminPublisher|<f1>+ executor : ExecutorService\l+ subscribed : boolean\l|}", style = "rounded, filled", fillcolor = "springgreen"];
-		AnimnalPulisherSubscription [label = "{<f0>AnimnalPulisherSubscription|<f1>+ animalsSent : int\l+ animals : List&lt;Animal&gt;\l&#10765; executor : ExecutorService\l+ future : Future&lt;?&gt;\l&#10765; subscriber : Subscriber&lt;? super String&gt;\l|}", style = "rounded, filled", fillcolor = "springgreen"];
-		AnimalSubscriber [label = "{<f0>AnimalSubscriber|<f1>&#10765; bufferSize : long\l+ count : long\l+ subscription : Subscription\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		AdminPublisher [label = "{<f0>AdminPublisher|<f1>+ executor : ExecutorService\l+ subscribed : boolean\l|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		AnimnalPulisherSubscription [label = "{<f0>AnimnalPulisherSubscription|<f1>+ animalsSent : int\l+ animals : List&lt;Animal&gt;\l&#10765; executor : ExecutorService\l+ future : Future&lt;?&gt;\l&#10765; subscriber : Subscriber&lt;? super String&gt;\l|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		AnimalSubscriber [label = "{<f0>AnimalSubscriber|<f1>&#10765; bufferSize : long\l+ count : long\l+ subscription : Subscription\l|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
 	}
 	
 	subgraph cluster50 {
-		label = "reactive stream (java.util.concurrent.Flow)";
+		label = "reactive stream (Java Flow API)";
 		style = filled;
 		color = grey90;
 		Processor [label = "{<f0>Processor&lt;T, R&gt;|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Publisher [label = "{<f0>Publisher&lt;T&gt;|<f2>+ subscribe(Subscriber&lt;? super T&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Subscriber [label = "{<f0>Subscriber&lt;T&gt;|<f2>+ onComplete() : void\l+ onError(Throwable) : void\l+ onNext(T) : void\l+ onSubscribe(Subscription) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Subscription [label = "{<f0>Subscription|<f2>+ cancel() : void\l+ request(int) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}
+	
+	subgraph cluster75 {
+		label = "";
+		style = filled;
+		color = grey90;
 	}
 	
 	/*
@@ -51,7 +57,8 @@ digraph reactive {
 	
 	AdminPublisher -> Publisher [arrowhead = "empty", label = "T = String"];
 	AnimalSubscriber -> Subscriber [arrowhead = "empty", label = "T = String"];
-	AnimalSubscriber:f1 -> Subscription [arrowhead = "vee"];
+	AdminPublisher:f2 -> AnimnalPulisherSubscription [arrowhead = "vee"];
 	AnimnalPulisherSubscription -> Subscription [arrowhead = "empty"];
-	AnimnalPulisherSubscription:f1 -> Subscriber [arrowhead = "vee"];
+	AnimnalPulisherSubscription:f1 -> AnimalSubscriber [arrowhead = "vee"];
+	AnimalSubscriber:f1 -> AnimnalPulisherSubscription [arrowhead = "vee"];
 }
