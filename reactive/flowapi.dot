@@ -21,7 +21,7 @@ digraph reactive {
 		Processor [label = "{<f0>Processor&lt;T, R&gt;|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Publisher [label = "{<f0>Publisher&lt;T&gt;|<f2>+ subscribe(Subscriber&lt;? super T&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Subscriber [label = "{<f0>Subscriber&lt;T&gt;|<f2>+ onComplete() : void\l+ onError(Throwable) : void\l+ onNext(T) : void\l+ onSubscribe(Subscription) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-		Subscription [label = "{<f0>Subscription|<f2>+ cancel() : void\l+ request(int) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		Subscription [label = "{<f0>Subscription|<f2>+ cancel() : void\l+ request(long) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 	}
 	
 	subgraph cluster75 {
