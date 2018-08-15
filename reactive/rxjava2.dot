@@ -20,22 +20,31 @@ digraph reactive {
 		style = filled;
 		color = grey90;
 		Completable [label = "{<f0>Completable|<f1>|<f2>&#537; create(CompletableOnSubscribe) : Completable\l&#537; fromAction(Action) : Completable\l&#537; fromCallable(Callable&lt;? extends T&gt;) : Completable\l&#186; subscribe(CompletableObserver) : void\l&#10765; subscribeWith(E) : E &lt;E extends CompletableObserver&gt;\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		CompletableEmitter [label = "{<f0>CompletableEmitter|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		CompletableFromPublisher [label = "{<f0>&#10765; CompletableFromPublisher&lt;T&gt;|<f1>&#10765; flowable : Publisher&lt;? extends T&gt;\l|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
 		CompletableObserver [label = "{<f0>CompletableObserver|<f2>+ onError(Throwable) : void\l+ onComplete(T) : void\l+ onSubscribe(Disposable) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		CompletableOnSubscribe [label = "{<f0>CompletableOnSubscribe|<f2>+ subscribe(CompletableEmitter) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		CompletableSource [label = "{<f0>CompletableSource|<f2>+ subscribe(CompletableObserver) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Disposable [label = "{<f0>Disposable|<f2>+ dispose() : void\l+ isDisposed() : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		DisposableObserver [label = "{<f0>DisposableObserver&lt;T&gt;|<f1>&#10765; s : AtomicReference&lt;Disposable&gt;\l|<f2>&#186; &#10765; dispose() : void\l&#186; &#10765; isDisposed() : boolean\l&#186; &#10765; onSubscribe(Disposable) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 		DisposableSubscriber [label = "{<f0>DisposableSubscriber&lt;T&gt;|<f1>&#10765; s : AtomicReference&lt;Disposable&gt;\l|<f2>&#186; &#10765; dispose() : void\l&#186; &#10765; isDisposed() : boolean\l&#186; &#10765; onSubscribe(Subscription) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		Emitter [label = "{<f0>Emitter&lt;T&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Flowable [label = "{<f0>Flowable&lt;T&gt;|<f1>|<f2>&#537; create(FlowableOnSubscribe&lt;T&gt;, FlowableEmitter.BackpressureMode) : Flowable&lt;T&gt; &lt;T&gt;\l&#537; fromArray(T...) : Flowable&lt;T&gt; &lt;T&gt;\l&#537; fromCallable(Callable&lt;? extends T&gt;) : Flowable&lt;T&gt; &lt;T&gt;\l&#537; fromIterable(Iterable&lt;? extends T&gt;) : Flowable&lt;T&gt; &lt;T&gt;\l&#537; just(T) : Flowable&lt;T&gt; &lt;T&gt;\l&#186; subscribe(Subscriber&lt;? super T&gt;) : void\l&#10765; subscribeWith(E) : E &lt;E extends Subscriber&lt;? super T&gt;&gt;\l&#10765; toCompletable() : Completable\l&#10765; toObservable() : Observable&lt;T&gt;\l&#10765; toSingle() : Single&lt;T&gt;\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		FlowableEmitter [label = "{<f0>FlowableEmitter&lt;T&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		FlowableFromObservables [label = "{<f0>&#10765; FlowableFromObservable&lt;T&gt;|<f1>&#10765; upstream : Observable&lt;T&gt;\l|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		FlowableOnSubscribe [label = "{<f0>FlowableOnSubscribe&lt;T&gt;|<f2>+ subscribe(FlowableEmitter&lt;T&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		FlowableProcessor [label = "{<f0>FlowableProcessor&lt;T&gt;|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 		Observable [label = "{<f0>Observable&lt;T&gt;|<f1>|<f2>&#537; create(ObservableOnSubscribe&lt;T&gt;) : Observable&lt;T&gt; &lt;T&gt;\l&#537; fromArray(T...) : Observable&lt;T&gt; &lt;T&gt;\l&#537; fromCallable(Callable&lt;? extends T&gt;) : Observable&lt;T&gt; &lt;T&gt;\l&#537; fromIterable(Iterable&lt;? extends T&gt;) : Observable&lt;T&gt; &lt;T&gt;\l&#537; just(T) : Observable&lt;T&gt; &lt;T&gt;\l&#186; subscribe(Observer&lt;? super T&gt;) : void\l&#10765; subscribeWith(E) : E &lt;E extends Observer&lt;? super T&gt;&gt;\l&#10765; toFlowable(BackpressureStrategy) : Flowable&lt;T&gt;\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		ObservableEmitter [label = "{<f0>ObservableEmitter&lt;T&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		ObservableFromPublisher [label = "{<f0>&#10765; ObservableFromPublisher&lt;T&gt;|<f1>&#10765; publisher : Publisher&lt;? extends T&gt;\l|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		ObservableOnSubscribe [label = "{<f0>ObservableOnSubscribe&lt;T&gt;|<f2>+ subscribe(ObservableEmitter&lt;T&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		ObservableSource [label = "{<f0>ObservableSource&lt;T&gt;|<f2>+ subscribe(Observer&lt;? super T&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Observer [label = "{<f0>Observer&lt;T&gt;|<f2>+ onComplete() : void\l+ onError(Throwable) : void\l+ onNext(T) : void\l+ onSubscribe(Disposable) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Single [label = "{<f0>Single&lt;T&gt;|<f1>|<f2>&#537; create(SingleOnSubscribe&lt;T&gt;) : Single&lt;T&gt; &lt;T&gt;\l&#537; fromCallable(Callable&lt;? extends T&gt;) : Single&lt;T&gt; &lt;T&gt;\l&#186; subscribe(SingleObserver&lt;? super T&gt;) : void\l&#10765; subscribeWith(E) : E &lt;E extends SingleObserver&lt;? super T&gt;&gt;\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		SingleEmitter [label = "{<f0>SingleEmitter&lt;T&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		SingleFromPublisher [label = "{<f0>&#10765; SingleFromPublisher&lt;T&gt;|<f1>&#10765; publisher : Publisher&lt;? extends T&gt;\l|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
 		SingleObserver [label = "{<f0>SingleObserver&lt;T&gt;|<f2>+ onError(Throwable) : void\l+ onSubscribe(Disposable) : void\l+ onSuccess(T) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		SingleOnSubscribe [label = "{<f0>SingleOnSubscribe&lt;T&gt;|<f2>+ subscribe(SingleEmitter&lt;T&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		SingleSource [label = "{<f0>SingleSource&lt;T&gt;|<f2>+ subscribe(SingleObserver&lt;? super T&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 	}
 	
@@ -88,6 +97,18 @@ digraph reactive {
 	CompletableObserver:f2 -> Disposable [arrowhead = "vee"];
 	Completable -> CompletableSource [arrowhead = "empty"];
 	CompletableFromPublisher -> Completable;
+	
+	// subscriber
+	Flowable:f2 -> FlowableOnSubscribe [arrowhead = "vee", label = "T = T"];
+	FlowableOnSubscribe:f2 -> FlowableEmitter [arrowhead = "vee", label = "T = T"];
+	FlowableEmitter -> Emitter [label = "T = T"];
+	Observable:f2 -> ObservableOnSubscribe [arrowhead = "vee", label = "T = T"];
+	ObservableOnSubscribe:f2 -> ObservableEmitter [arrowhead = "vee", label = "T = T"];
+	ObservableEmitter -> Emitter [label = "T = T"];
+	Completable:f2 -> CompletableOnSubscribe [arrowhead = "vee"];
+	CompletableOnSubscribe:f2 -> CompletableEmitter [arrowhead = "vee"];
+	Single:f2 -> SingleOnSubscribe [arrowhead = "vee", label = "T = T"];
+	SingleOnSubscribe:f2 -> SingleEmitter [arrowhead = "vee", label = "T = T"];
 	
 	// disposables
 	DisposableObserver -> Observer [arrowhead = "empty", label = "T = T"];
