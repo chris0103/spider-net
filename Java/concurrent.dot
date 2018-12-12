@@ -1,0 +1,35 @@
+digraph name {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+	
+	/*
+	subgraph cluster00 {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	
+	// item_name [label = "item_lable", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	*/
+	
+	// item_foo -> item_bar;
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
+	
+	// This is commented for dot to run, but it SHOULD BE uncommented as soon as dot works fine again
+	// ****************** dot cracks from below ******************** //
+	// ill link;
+	
+	// current is current_progress_item
+}

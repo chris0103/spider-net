@@ -1,0 +1,87 @@
+digraph name {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 8;
+    node [fontname = "Verdana", fontsize = 8, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 8];
+	
+	subgraph cluster25 {
+		label = "hybrid";
+		style = filled;
+		color = grey90;
+	}	
+	
+	subgraph cluster50 {
+		label = "in";
+		style = filled;
+		color = grey90;
+		AutoCloseable [shape = "plaintext", label = "AutoCloseable"];
+		ByteArrayInputStream [label = "{<f0>ByteArrayInputStream|<f1>+ buf : byte[]\l+ count : int\l+ mark : int\l+ pos : int\l|<f2>&#186; available() : int\l&#186; close() : void\l&#186; mark() : void\l&#186; markSupported() : boolean\l&#186; read(byte[], int, int) : int\l&#186; reset() : void\l&#186; skip(long) : long\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		Closeable [label = "{<f0>Closeable|<f2>+ close() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		FileInputStream [label = "{<f0>FileInputStream|<f1>+ channel : FileChannel\l+ closed : boolean\l+ fd : FileDescriptor\l+ path : String\l|<f2>&#186; available() : int\l&#186; close() : void\l&#186; read(byte[]) : int\l&#186; read(byte[], int, int) : int\l&#186; skip(long) : long\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		InputStream [label = "{<f0>InputStream||<f2>+ available() : int\l&#186; close() : void\l+ mark() : int\l+ markSupported() : boolean\l&#170; read() : int\l+ read(byte[]) : int\l+ read(byte[], int, int) : int\l+ reset() : void\l+ skip(long) : long\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		PipedInputStream [label = "{<f0>PipedInputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	subgraph cluster75 {
+		label = "out";
+		style = filled;
+		color = grey90;
+	}
+	
+	Appendable [shape = "plaintext", label = "Appendable"];
+	BufferedOutputStream [label = "{<f0>BufferedOutputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
+	FileWriter [label = "{<f0>FileWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
+	FilterOutputStream [label = "{<f0>FilterOutputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
+	Flushable [label = "{<f0>Flushable|<f2>+ flush() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	OutputStream [label = "{<f0>OutputStream||<f2>&#186; close() : void\l&#186; flush() : void\l&#170; write(int) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	OutputStreamWriter [label = "{<f0>OutputStreamWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
+	PrintStream [label = "{<f0>PrintStream||}", style = "rounded, filled", fillcolor = "springgreen"];
+	PrintWriter [label = "{<f0>PrintWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
+	Writer [label = "{<f0>Writer||<f2>&#170; close() : void\l&#170; flush() : void\l&#170; write(char[], int, int) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	
+	// other creatures
+	
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	
+	/*
+	subgraph cluster {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	*/
+
+	// input stream
+	InputStream -> Closeable [arrowhead = "empty"];
+	ByteArrayInputStream -> InputStream;
+	FileInputStream -> InputStream;
+	PipedInputStream -> InputStream;
+	
+	BufferedOutputStream -> FilterOutputStream;
+	FilterOutputStream -> OutputStream;
+	OutputStream -> Closeable [arrowhead = "empty"];
+	OutputStream -> Flushable [arrowhead = "empty"];
+	Closeable -> AutoCloseable [arrowhead = "odot"];
+	FileWriter -> OutputStreamWriter;
+	OutputStreamWriter -> Writer;
+	Writer -> Closeable [arrowhead = "empty"];
+	Writer -> Flushable [arrowhead = "empty"];
+	Writer -> Appendable [arrowhead = "odot"];
+	PrintStream -> FilterOutputStream;
+	PrintStream -> Closeable [arrowhead = "empty"];
+	PrintStream -> Appendable [arrowhead = "odot"];
+	PrintWriter -> Writer;
+
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
+	
+	
+	// current is current_progress_item
+}
