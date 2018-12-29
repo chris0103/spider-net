@@ -1,9 +1,29 @@
-digraph name {
+digraph concurrent {
 	rankdir = BT;
     fontname = "Verdana";
     fontsize = 12;
     node [fontname = "Verdana", fontsize = 12, shape = "record"];
     edge [fontname = "Verdana", fontsize = 12];
+	
+	subgraph cluster25 {
+		label = "executor";
+		style = filled;
+		color = grey90;
+		Executor [label = "{<f0>Executor|<f2>+ execute(Runnable) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ExecutorService [label = "{<f0>ExecutorService|<f2>+ submit(Callable&lt;T&gt;) : Future&lt;T&gt; &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}
+	
+	subgraph cluster50 {
+		label = "future";
+		style = filled;
+		color = grey90;
+		CompletableFuture [label = "{<f0>CompletableFuture&lt;T&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		CompletionStage [label = "{<f0>CompletionStage&lt;T&gt;|<f2>+ exceptionally(Function&lt;Throwable, ? extends T&gt;) : CompletionStage&lt;T&gt;\l+ handle(BiFunction&lt;? super T, Throwable, ? extends U&gt;) : CompletionStage&lt;U&gt; &lt;U&gt;\l+ thenAccept(Consumer&lt;? super T&gt;) : CompletionStage&lt;Void&gt; \l+ thenApply(Function&lt;? super T,? extends U&gt;) : CompletionStage&lt;U&gt; &lt;U&gt;\l+ thenCombine(CompletionStage&lt;? extends U&gt;, BiFunction&lt;? super T,? super U,? extends V&gt;) : CompletionStage&lt;V&gt; &lt;U,V&gt;\l+ thenCompose(Function&lt;? super T, ? extends CompletionStage&lt;U&gt;&gt;) : CompletionStage&lt;U&gt; &lt;U&gt;\l+ thenRun(Runnable) : CompletionStage&lt;Void&gt; \l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		Future [label = "{<f0>Future&lt;V&gt;|<f2>+ cancel(boolean) : boolean\l+ get(long, TimeUnit) : V\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		FutureTask [label = "{<f0>FutureTask&lt;V&gt;|<f1>+ callable : Callable&lt;V&gt;\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		Runnable [shape = "plaintext", label = "Runnable"];
+		RunnableFuture [label = "{<f0>RunnableFuture&lt;V&gt;|<f2>&#186; run() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}
 	
 	/*
 	subgraph cluster00 {
@@ -27,9 +47,14 @@ digraph name {
 	// Referer -> Referee [arrowhead = "vee"];
 	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
 	
-	// This is commented for dot to run, but it SHOULD BE uncommented as soon as dot works fine again
-	// ****************** dot cracks from below ******************** //
-	// ill link;
+	// future
+	CompletableFuture -> Future [arrowhead = "empty", label = "V = T"];
+	CompletableFuture -> CompletionStage [arrowhead = "empty"];
+	RunnableFuture -> Future;
+	RunnableFuture -> Runnable [arrowhead = "odot"];
+	FutureTask -> RunnableFuture [arrowhead = "empty"];
 	
-	// current is current_progress_item
+	// executor
+	ExecutorService -> Executor;
+	ExecutorService:f2 -> Future [arrowhead = "vee"];
 }

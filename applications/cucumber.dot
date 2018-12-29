@@ -11,7 +11,7 @@ digraph cucumber {
 		color = grey90;
 		En [label = "{<f0>En|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		GlueBase [label = "{<f0>GlueBase|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-		LambdaGlueBase [label = "{<f0>GlueBase|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		LambdaGlueBase [label = "{<f0>LambdaGlueBase|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 	}
 	
 	subgraph cluster75 {
