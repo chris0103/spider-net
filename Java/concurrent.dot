@@ -9,8 +9,10 @@ digraph concurrent {
 		label = "executor";
 		style = filled;
 		color = grey90;
+		AbstractExecutorService [label = "{<f0>AbstractExecutorService||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 		Executor [label = "{<f0>Executor|<f2>+ execute(Runnable) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-		ExecutorService [label = "{<f0>ExecutorService|<f2>+ submit(Callable&lt;T&gt;) : Future&lt;T&gt; &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ExecutorService [label = "{<f0>ExecutorService|<f2>+ shutdown() : void\l+ submit(Callable&lt;T&gt;) : Future&lt;T&gt; &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ThreadPoolExecutor [label = "{<f0>ThreadPoolExecutor|<f1>+ corePoolSize : int\l+ keepAliveTime : long\l+ maximumPoolSize : int\l+ workQueue : BlockingQueue&lt;Runnable&gt;\l|}", style = "rounded, filled", fillcolor = "springgreen"];
 	}
 	
 	subgraph cluster50 {
@@ -57,4 +59,6 @@ digraph concurrent {
 	// executor
 	ExecutorService -> Executor;
 	ExecutorService:f2 -> Future [arrowhead = "vee"];
+	AbstractExecutorService -> ExecutorService [arrowhead = "empty"];
+	ThreadPoolExecutor -> AbstractExecutorService;
 }
