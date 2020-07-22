@@ -8,14 +8,16 @@ digraph concurrent {
 	subgraph cluster25 {
 		label = "executor";
 		style = filled;
-		color = grey90;
+		color = grey90;				
 		AbstractExecutorService [label = "{<f0>AbstractExecutorService||<f2>+ newTaskFor(Callable&lt;T&gt;) : RunnableFuture&lt;T&gt;\l+ newTaskFor(Runnable, T) : RunnableFuture&lt;T&gt;\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 		CompletionService [label = "{<f0>CompletionService&lt;&gt;|<f2>+ poll() : Future&lt;V&gt;\l+ poll(long, TimeUnit) : Future&lt;V&gt;\l+ submit(Callable&lt;V&gt;) : Future&lt;V&gt;\l+ submit(Runnable, V) : Future&lt;V&gt;\l+ take() : Future&lt;V&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Executor [label = "{<f0>Executor|<f2>+ execute(Runnable) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		ExecutorCompletionService [label = "{<f0>ExecutorCompletionService&lt;&gt;|<f1>+ aes : AbstractExecutorService\l+ completionQueue : BlockingQueue&lt;Future&lt;V&gt;&gt;\l+ executor : Executor\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		Executors [label = "{<f0>Executors||<f2>&#537; newFixedThreadPool(int) : ExecutorService\l&#537; newScheduledThreadPool(int) : ScheduledExecutorService\l}", style = "rounded, filled", fillcolor = "springgreen"];
 		ExecutorService [label = "{<f0>ExecutorService|<f2>+ awaitTermination(long, TimeUnit) : boolean\l+ invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt;) : List&lt;Future&lt;T&gt;&gt; &lt;T&gt;\l+ invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt;, long, TimeUnit) : List&lt;Future&lt;T&gt;&gt; &lt;T&gt;\l+ invokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt;) : T &lt;T&gt;\l+ invokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt;, long, TimeUnit) : T &lt;T&gt;\l+ submit(Callable&lt;T&gt;) : Future&lt;T&gt; &lt;T&gt;\l+ shutdown() : void\l+ shutdownNow() : List&lt;Runnable&gt;\l+ submit(Runnable) : Future&lt;?&gt;\l+ submit(Runnable, T) : Future&lt;T&gt; &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		ScheduledExecutorService [label = "{<f0>ScheduledExecutorService||<f2>+ schedule(Runnable, long, TimeUnit) : ScheduledFuture&lt;?&gt;\l+ schedule(Callable&lt;V&gt;, long, TimeUnit) : ScheduledFuture&lt;V&gt; &lt;V&gt;\l+ scheduleAtFixedRate(Runnable, long, long, TimeUnit) : ScheduledFuture&lt;?&gt;\l+ scheduleWithFixedDelay(Runnable, long, long, TimeUnit) : ScheduledFuture&lt;?&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-		ThreadPoolExecutor [label = "{<f0>ThreadPoolExecutor|<f1>+ corePoolSize : int\l+ keepAliveTime : long\l+ maximumPoolSize : int\l+ threadFactory : ThreadFactory\l+ workQueue : BlockingQueue&lt;Runnable&gt;\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		ScheduledThreadPoolExecutor [label = "{<f0>ScheduledThreadPoolExecutor||}", style = "rounded, filled", fillcolor = "springgreen"];
+		ThreadPoolExecutor [label = "{<f0>ThreadPoolExecutor|<f1>+ corePoolSize : int\l+ keepAliveTime : long\l+ maximumPoolSize : int\l+ threadFactory : ThreadFactory\l+ workQueue : BlockingQueue&lt;Runnable&gt;\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];		
 	}
 	
 	subgraph cluster50 {
@@ -28,6 +30,8 @@ digraph concurrent {
 		FutureTask [label = "{<f0>FutureTask&lt;V&gt;|<f1>+ callable : Callable&lt;V&gt;\l|}", style = "rounded, filled", fillcolor = "springgreen"];
 		Runnable [shape = "plaintext", label = "Runnable"];
 		RunnableFuture [label = "{<f0>RunnableFuture&lt;V&gt;|<f2>&#186; run() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		RunnableScheduledFuture [label = "{<f0>RunnableScheduledFuture&lt;V&gt;|<f2>+ isPeriodic() : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ScheduledFuture [label = "{<f0>ScheduledFuture&lt;V&gt;|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 	}
 	
 	/*
@@ -51,13 +55,7 @@ digraph concurrent {
 	// Subclass -> Class;	
 	// Referer -> Referee [arrowhead = "vee"];
 	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
-	
-	// future
-	CompletableFuture -> Future [arrowhead = "empty", label = "V = T"];
-	CompletableFuture -> CompletionStage [arrowhead = "empty"];
-	RunnableFuture -> Future;
-	RunnableFuture -> Runnable [arrowhead = "odot"];
-	FutureTask -> RunnableFuture [arrowhead = "empty"];
+
 	
 	// executor
 	ExecutorService -> Executor;
@@ -65,26 +63,29 @@ digraph concurrent {
 	AbstractExecutorService -> ExecutorService [arrowhead = "empty"];
 	AbstractExecutorService:f2 -> FutureTask [arrowhead = "vee", label = "V = T"];
 	ThreadPoolExecutor -> AbstractExecutorService;
+	ScheduledThreadPoolExecutor -> ThreadPoolExecutor;
+	ScheduledThreadPoolExecutor -> ScheduledExecutorService [arrowhead = "empty"];
+	ScheduledExecutorService -> ExecutorService;
+	ScheduledExecutorService:f2 -> ScheduledFuture;
+	
 	ExecutorCompletionService:f1 -> AbstractExecutorService [arrowhead = "vee"];
 	ExecutorCompletionService:f1 -> Executor [arrowhead = "vee"];
 	ExecutorCompletionService -> CompletionService [arrowhead = "empty"];
-	ScheduledExecutorService -> ExecutorService;
-	
-	/*
-	
-	
-	RunnableFuture -> Runnable [arrowhead = "odot"];
-	RunnableFuture -> Future;
-	
-	Executors:f2 -> ThreadPoolExecutor [arrowhead = "vee"];
 	
 	Executors:f2 -> ScheduledThreadPoolExecutor [arrowhead = "vee"];
-	ScheduledThreadPoolExecutor -> ScheduledExecutorService [arrowhead = "empty"];
 	
-	ScheduledExecutorService:f2 -> ScheduledFuture;
-	ScheduledFuture -> Future;
-	ScheduledThreadPoolExecutor -> ThreadPoolExecutor;
-	RunnableScheduledFuture -> RunnableFuture;
+	
+	Executors:f2 -> ThreadPoolExecutor [arrowhead = "vee"];
 	RunnableScheduledFuture -> ScheduledFuture;
-	*/
+	
+	ScheduledFuture -> Future;	
+	RunnableScheduledFuture -> RunnableFuture;	
+		
+	// future
+	CompletableFuture -> Future [arrowhead = "empty", label = "V = T"];
+	CompletableFuture -> CompletionStage [arrowhead = "empty"];
+	RunnableFuture -> Future;
+	RunnableFuture -> Runnable [arrowhead = "odot"];
+	FutureTask -> RunnableFuture [arrowhead = "empty"];
+
 }
