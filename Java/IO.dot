@@ -1,7 +1,7 @@
 digraph name {
 	rankdir = BT;
     fontname = "Verdana";
-    fontsize = 8;
+    fontsize = 12;
     node [fontname = "Verdana", fontsize = 8, shape = "record"];
     edge [fontname = "Verdana", fontsize = 8];
 	
