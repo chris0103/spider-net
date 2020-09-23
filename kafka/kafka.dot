@@ -1,0 +1,116 @@
+digraph kafka {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+	
+	subgraph cluster50 {
+		label = "kafka";
+		style = filled;
+		color = grey90;
+		subgraph cluster5015 {
+			label = "app";
+			style = filled;
+			color = grey85;
+			CustomPartitionProducer [label = "{<f0>CustomPartitionProducer|<f1>+ producer : KafkaProducer&lt;String, String&gt;\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+			SimpleHLConsumer [label = "{<f0>SimpleHLConsumer|<f1>+ consumer : ConsumerConnector\l+ topic : String\l|<f2>+ testConsumer() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			SimplePartitioner [label = "{<f0>SimplePartitioner||<f2>&#186; partition(String, Object, byte[], Object, byte[], Cluster) : int\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			SimpleProducer [label = "{<f0>SimpleProducer|<f1>+ producer : KafkaProducer&lt;String, String&gt;\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		}
+		
+		subgraph cluster5025 {
+			label = "common";
+			style = filled;
+			color = grey85;
+			AbstractConfig [label = "{<f0>AbstractConfig|<f1>+ originals : Map&lt;String, ?&gt;\l+ used : Set&lt;String&gt;\l+ values : Map&lt;String, Object&gt;\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+			Configurable [label = "{<f0>Configurable|<f2>+ configure(Map&lt;String, ?&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];	
+			IteratorTemplate [label = "{<f0>IteratorTemplate&lt;T&gt;||<f2>+ next() : T\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			TopicPartition [label = "{<f0>TopicPartition|<f1>+ partition : int\l+ topic : String\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		}
+		
+		subgraph cluster5035 {
+			label = "consumer";
+			style = filled;
+			color = grey85;
+			ConsumerConnector [label = "{<f0>ConsumerConnector|<f2>+ commitOffsets(Map&lt;TopicAndPartition, OffsetAndMetadata&gt;, boolean) : void\l+ createMessageStreams(Map&lt;String, Integer&gt;) : Map&lt;String, List&lt;KafkaStream&lt;byte[], byte[]&gt;&gt;&gt;\l+ createMessageStreams(Map&lt;String, Integer&gt;, Decoder&lt;K&gt;, Decoder&lt;V&gt;) : Map&lt;String, List&lt;KafkaStream&lt;K, V&gt;&gt;&gt; &lt;K, V&gt;\l+ createMessageStreamsByFilter(TopicFilter) : List&lt;KafkaStream&lt;byte[], byte[]&gt;&gt;\l+ createMessageStreamsByFilter(TopicFilter, int) : List&lt;KafkaStream&lt;byte[], byte[]&gt;&gt;\l+ createMessageStreamsByFilter(TopicFilter, int, Decoder&lt;K&gt;, Decoder&lt;V&gt;) : List&lt;KafkaStream&lt;K, V&gt;&gt; &lt;K, V&gt;\l+ shutdown() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ConsumerIterator [label = "{<f0>ConsumerIterator&lt;K, V&gt;|<f1>+ clientId : String\l+ keyDecoder : Decoder&lt;K&gt;\l+ valueDecoder : Decoder&lt;V&gt;\l|<f2>&#186; next() : MessageAndMetadata&lt;K, V&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			FetchRequest [label = "{<f0>FetchRequest||}", style = "rounded, filled", fillcolor = "springgreen"];
+			KafkaStream [label = "{<f0>KafkaStream&lt;K, V&gt;|<f1>+ iter : ConsumerIterator\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+			OffsetCommitRequest [label = "{<f0>OffsetCommitRequest||}", style = "rounded, filled", fillcolor = "springgreen"];
+			OffsetFetchRequest [label = "{<f0>OffsetFetchRequest||}", style = "rounded, filled", fillcolor = "springgreen"];
+			OffsetRequest [label = "{<f0>OffsetRequest||}", style = "rounded, filled", fillcolor = "springgreen"];
+			SimpleConsumer [label = "{<f0>SimpleConsumer||<f2>+ close() : void\l+ commitOffsets(OffsetCommitRequest) : OffsetCommitResponse\l+ fetch(FetchRequest) : FetchResponse\l+ fetchOffsets(OffsetFetchRequest) : OffsetFetchResponse\l+ getOffsetsBefore(OffsetRequest) : OffsetResponse\l+ send(TopicMetadataRequest) : TopicMetadataResponse\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			TopicMetadataRequest [label = "{<f0>TopicMetadataRequest||}", style = "rounded, filled", fillcolor = "springgreen"];
+		}
+		
+		subgraph cluster5045 {
+			label = "message";
+			style = filled;
+			color = grey85;
+			MessageAndMetadata [label = "{<f0>MessageAndMetadata&lt;K, V&gt;|<f1>+ offset : long\l+ partition : int\l+ rawMessage : Message\l+ partition : int\l|<f2>+ key() : K\l+ message() : V\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		}
+		
+		subgraph cluster5050 {
+			label = "producer";
+			style = filled;
+			color = grey85;
+			DefaultPartitioner [label = "{<f0>DefaultPartitioner||}", style = "rounded, filled", fillcolor = "springgreen"];
+			KafkaProducer [label = "{<f0>KafkaProducer&lt;K, V&gt;|<f1>+ interceptors : ProducerInterceptors&lt;K, V&gt;\l+ partitioner : Partitioner\l+ producerConfig : ProducerConfig\l+ sender : Sender\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+			Partitioner [label = "{<f0>Partitioner|<f2>+ partition(String, Object, byte[], Object, byte[], Cluster) : int\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ProducerConfig [label = "{<f0>ProducerConfig||<f2>&#537; configNames() : Set&lt;String&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			Producer [label = "{<f0>Producer&lt;K, V&gt;|<f2>+ send(ProducerRecord&lt;K, V&gt;) : Future&lt;RecordMetadata&gt;\l+ send(ProducerRecord&lt;K, V&gt;, Callback) : Future&lt;RecordMetadata&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ProducerInterceptor [label = "{<f0>ProducerInterceptor&lt;K, V&gt;|<f2>+ onAcknowledgement(RecordMetadata, Exception) : void\l+ onSend(ProducerRecord&lt;K, V&gt;) : ProducerRecord&lt;K, V&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ProducerInterceptors [label = "{<f0>ProducerInterceptors|<f1>+ interceptors : List&lt;ProducerInterceptor&lt;K, V&gt;&gt;\l|<f2>+ onAcknowledgement(RecordMetadata, Exception) : void\l+ onSend(ProducerRecord&lt;K, V&gt;) : ProducerRecord&lt;K, V&gt;\l+ onSendError(ProducerRecord&lt;K, V&gt;, TopicPartition, Exception) : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			ProducerRecord [label = "{<f0>ProducerRecord&lt;K, V&gt;|<f1>+ key : K\l+ partition : Integer\l+ timestamp : Long\l+ topic : String\l+ value : V\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+			RecordMetadata [label = "{<f0>RecordMetadata|<f1>+ checksum : long\l+ offset : long\l+ serializedKeySize : int\l+ serializedValueSize : int\l+ timestamp : long\l+ topicPartition : TopicPartition\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		}
+	}
+	/*
+	
+	// item_name [label = "item_lable", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	*/
+	
+	// item_foo -> item_bar;
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
+	
+	CustomPartitionProducer -> KafkaProducer [arrowhead = "vee", label = "K = String, V = String"];
+	SimpleProducer -> KafkaProducer [arrowhead = "vee", label = "K = String, V = String"];
+	KafkaProducer:f1 -> ProducerConfig [arrowhead = "vee"];
+	KafkaProducer:f1 -> ProducerInterceptors [arrowhead = "vee", label = "K = K, V = V"];
+	ProducerInterceptors:f1 -> ProducerInterceptor [arrowhead = "vee", label = "K = K, V = V"];
+	ProducerInterceptor:f2 -> ProducerRecord [arrowhead = "vee", label = "K = K, V = V"];
+	ProducerInterceptor:f2 -> RecordMetadata [arrowhead = "vee"];
+	ProducerInterceptor -> Configurable;
+	ProducerConfig -> AbstractConfig;
+	KafkaProducer:f1 -> SimplePartitioner [arrowhead = "vee"];
+	SimplePartitioner -> DefaultPartitioner;
+	DefaultPartitioner -> Partitioner [arrowhead = "empty"];
+	Partitioner -> Configurable;
+	KafkaProducer -> Producer [arrowhead = "empty", label = "K = K, V = V"];
+	Producer:f2 -> ProducerRecord [arrowhead = "vee", label = "K = K, V = V"];
+	Producer:f2 -> RecordMetadata [arrowhead = "vee"];
+	RecordMetadata:f1 -> TopicPartition [arrowhead = "vee"];
+	
+	// consumer
+	SimpleHLConsumer:f1 -> ConsumerConnector [arrowhead = "vee"];
+	ConsumerConnector:f2 -> KafkaStream [arrowhead = "vee", label = "K = byte[], V = byte[]"];
+	KafkaStream:f1 -> ConsumerIterator [arrowhead = "vee", label = "K = K, V = V"];
+	ConsumerIterator -> IteratorTemplate [label = "T = MessageAndMetadata&lt;K, V&gt;"];
+	ConsumerIterator:f2 -> MessageAndMetadata [arrowhead = "vee", label = "K = K, V = V"];
+	
+	SimpleConsumer:f2 -> OffsetCommitRequest [arrowhead = "vee"];
+	SimpleConsumer:f2 -> FetchRequest [arrowhead = "vee"];
+	SimpleConsumer:f2 -> OffsetFetchRequest [arrowhead = "vee"];
+	SimpleConsumer:f2 -> OffsetRequest [arrowhead = "vee"];
+	SimpleConsumer:f2 -> TopicMetadataRequest [arrowhead = "vee"];
+}
