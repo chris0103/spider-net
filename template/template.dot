@@ -5,7 +5,11 @@ digraph name {
     node [fontname = "Verdana", fontsize = 12, shape = "record"];
     edge [fontname = "Verdana", fontsize = 12];
 	
-	/*
+	/*	
+	
+	// configuration node
+	node [shape = "record", style = "rounded, filled"];
+	
 	subgraph cluster00 {
 		label = "";
 		style = filled;
@@ -20,6 +24,7 @@ digraph name {
 	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	// bean_record [label = "{<f0>beanId|<f1>beanClass|{{<f20>property1|<f21>property2}}}"];
 	*/
 	
 	// item_foo -> item_bar;
