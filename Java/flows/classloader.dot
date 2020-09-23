@@ -1,0 +1,64 @@
+digraph classloader {
+	rankdir = LR;
+    fontname = "Verdana";
+    fontsize = 8;
+    node [fontname = "Verdana", fontsize = 8, shape = "record", style = "rounded, filled", fillcolor = "springgreen"];
+    edge [fontname = "Verdana", fontsize = 10];
+	
+	{rank = same; begin; loadClass; findLoadedClass; resolve; resolveClass; defineClass; end; }
+	{rank = same; parentExists; parentLoadClass; classLoaded; findClass; }
+	
+	begin [label = "begin", shape = "circle"];
+	
+	classLoaded [label = "class loaded ?", shape = "diamond", style = "filled", fillcolor = "lightpink"];
+	defineClass [label = "defineClass()"];
+	findClass [label = "findClass()"];
+	findLoadedClass [label = "findLoadedClass()"];
+	findBootstrapClassOrNull [label = "findBootstrapClassOrNull()"];
+	parentExists [label = "parent exists ?", shape = "diamond", style = "filled", fillcolor = "lightpink"];
+	parentLoadClass [label = "parent.loadedClass()"];
+	loadClass [label = "loadClass()"];
+	resolve [label = "resolve class ?", shape = "diamond", style = "filled", fillcolor = "lightpink"];
+	resolveClass [label = "resolveClass()"];
+	
+	end [label = "end", shape = "circle"];
+	
+	/*
+	subgraph cluster {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	
+	// item_name [label = "item_lable", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	*/
+	
+	// item_foo -> item_bar;
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
+	
+	begin -> loadClass;
+	loadClass -> findLoadedClass;
+	findLoadedClass -> parentExists [label = "not found"];
+	parentExists -> findBootstrapClassOrNull [label = "N", tailport = "e"];
+	findBootstrapClassOrNull -> classLoaded [headport = "e"];
+	parentExists -> parentLoadClass [label = "Y", tailport = "s"];
+	parentLoadClass -> classLoaded;	
+	classLoaded -> findClass [label = "N"];
+	findClass -> resolve [headport = "e"];
+	classLoaded -> resolve [label = "Y", headport = "e", tailport = "w"];
+	findLoadedClass -> resolve [label = "found"];
+	resolve -> resolveClass [label = "Y"];
+	resolveClass -> defineClass;
+	resolve -> defineClass [label = "N", tailport = "w"];
+	
+	defineClass -> end;
+}
