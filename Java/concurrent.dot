@@ -24,9 +24,9 @@ digraph concurrent {
 		label = "future";
 		style = filled;
 		color = grey90;
-		CompletableFuture [label = "{<f0>CompletableFuture&lt;T&gt;||<f2>&#537; allOf(CompletableFuture&lt;?&gt;...) : CompletableFuture&lt;Void&gt;\l+ join() : T\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		CompletableFuture [label = "{<f0>CompletableFuture&lt;T&gt;||<f2>&#537; allOf(CompletableFuture&lt;?&gt;...) : CompletableFuture&lt;Void&gt;\l+ getNow(T) : T\l+ join() : T\l}", style = "rounded, filled", fillcolor = "springgreen"];
 		CompletionStage [label = "{<f0>CompletionStage&lt;T&gt;|<f2>+ exceptionally(Function&lt;Throwable, ? extends T&gt;) : CompletionStage&lt;T&gt;\l+ handle(BiFunction&lt;? super T, Throwable, ? extends U&gt;) : CompletionStage&lt;U&gt; &lt;U&gt;\l+ thenAccept(Consumer&lt;? super T&gt;) : CompletionStage&lt;Void&gt; \l+ thenApply(Function&lt;? super T,? extends U&gt;) : CompletionStage&lt;U&gt; &lt;U&gt;\l+ thenCombine(CompletionStage&lt;? extends U&gt;, BiFunction&lt;? super T,? super U,? extends V&gt;) : CompletionStage&lt;V&gt; &lt;U,V&gt;\l+ thenCompose(Function&lt;? super T, ? extends CompletionStage&lt;U&gt;&gt;) : CompletionStage&lt;U&gt; &lt;U&gt;\l+ thenRun(Runnable) : CompletionStage&lt;Void&gt; \l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-		Future [label = "{<f0>Future&lt;V&gt;|<f2>+ cancel(boolean) : boolean\l+ get(long, TimeUnit) : V\l+ get() : V\l+ isCancelled() : boolean\l+ isDone() : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		Future [label = "{<f0>Future&lt;T&gt;|<f2>+ cancel(boolean) : boolean\l+ get(long, TimeUnit) : V\l+ get() : V\l+ isCancelled() : boolean\l+ isDone() : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		FutureTask [label = "{<f0>FutureTask&lt;V&gt;|<f1>+ callable : Callable&lt;V&gt;\l|}", style = "rounded, filled", fillcolor = "springgreen"];
 		Runnable [shape = "plaintext", label = "Runnable"];
 		RunnableFuture [label = "{<f0>RunnableFuture&lt;V&gt;|<f2>&#186; run() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
@@ -59,7 +59,7 @@ digraph concurrent {
 	
 	// executor
 	ExecutorService -> Executor;
-	ExecutorService:f2 -> Future [arrowhead = "vee", label = "V = T"];
+	ExecutorService:f2 -> Future [arrowhead = "vee"];
 	AbstractExecutorService -> ExecutorService [arrowhead = "empty"];
 	AbstractExecutorService:f2 -> FutureTask [arrowhead = "vee", label = "V = T"];
 	ThreadPoolExecutor -> AbstractExecutorService;
@@ -82,7 +82,7 @@ digraph concurrent {
 	RunnableScheduledFuture -> RunnableFuture;	
 		
 	// future
-	CompletableFuture -> Future [arrowhead = "empty", label = "V = T"];
+	CompletableFuture -> Future [arrowhead = "empty"];
 	CompletableFuture -> CompletionStage [arrowhead = "empty"];
 	RunnableFuture -> Future;
 	RunnableFuture -> Runnable [arrowhead = "odot"];

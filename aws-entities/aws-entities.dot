@@ -1,0 +1,112 @@
+digraph name {
+	rankdir = TB;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+    
+    availability_zone [label = "Availability Zone", style = "filled", fillcolor = "palegreen"];
+
+	subgraph cluster10 {
+		label = "IAM";
+		style = filled;
+		color = grey90;
+		policy [label = "Policy", style = "filled", fillcolor = "palegreen"];
+		role [label = "Role", style = "filled", fillcolor = "palegreen"];
+	}
+
+	subgraph cluster15 {
+		label = "EC2";
+		style = filled;
+		color = grey90;
+		instance [label = "Instance", style = "filled", fillcolor = "palegreen"];
+	}
+	
+	subgraph cluster25 {
+		label = "MSK";
+		style = filled;
+		color = grey90;
+		msk_cluster [label = "MSK Cluster", style = "filled", fillcolor = "palegreen"];
+	}
+	
+	subgraph cluster30 {
+		label = "Lambda";
+		style = filled;
+		color = grey90;
+		alias [label = "Alias", style = "filled", fillcolor = "palegreen"];
+		function [label = "Function", style = "filled", fillcolor = "palegreen"];
+		trigger [label = "Trigger", style = "filled", fillcolor = "palegreen"];
+		version [label = "Version", style = "filled", fillcolor = "palegreen"];
+	}
+	
+	subgraph cluster35 {
+		label = "Network & Security";
+		style = filled;
+		color = grey90;
+		network_interface [label = "Network interface", style = "filled", fillcolor = "palegreen"];
+		security_group [label = "Security Group", style = "filled", fillcolor = "palegreen"];
+	}	
+	
+	subgraph cluster50 {
+		label = "VPC";
+		style = filled;
+		color = grey90;
+		internet_gateway [label = "Internet Gateway", style = "filled", fillcolor = "palegreen"];
+		nat_gateway [label = "NAT Gateway", style = "filled", fillcolor = "palegreen"];
+		route_table [label = "Route Table", style = "filled", fillcolor = "palegreen"];
+		subnet [label = "Subnet", style = "filled", fillcolor = "palegreen"];
+		vpc [label = "VPC", style = "filled", fillcolor = "palegreen"];
+	}
+	
+	/*	
+	
+	// configuration node
+	node [shape = "record", style = "rounded, filled"];
+	
+	subgraph cluster00 {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	
+	// item_name [label = "item_label", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// record_without_properties [shape = "record", label = "{<f0>label|<f1>value}"];
+	// record_with_properties [shape = "record", label = "{<f0>label|<f1>value|{{<f20>property|<f21>value}}}"];
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	// bean_record [label = "{<f0>beanId|<f1>beanClass|{{<f20>property1|<f21>property2}}}"];
+	*/
+	
+	// item_foo -> item_bar;
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
+
+	vpc -> subnet [arrowhead = "vee"];
+	vpc -> nat_gateway [arrowhead = "vee"];
+	nat_gateway -> subnet [arrowhead = "vee"];
+	vpc -> internet_gateway [arrowhead = "vee"];
+	subnet -> route_table [arrowhead = "vee"];
+	msk_cluster -> vpc [arrowhead = "vee"];
+	instance -> vpc [arrowhead = "vee"];
+	instance -> availability_zone [arrowhead = "vee"];
+	msk_cluster -> security_group [arrowhead = "vee"];
+	vpc -> security_group [arrowhead = "vee"];
+	vpc -> network_interface [arrowhead = "vee"];
+	subnet -> availability_zone [arrowhead = "vee"];
+	subnet -> network_interface [arrowhead = "vee"];
+	
+	function -> alias [arrowhead = "vee"];
+	alias -> version [arrowhead = "vee"];
+	function -> version [arrowhead = "vee"];
+	version -> trigger [arrowhead = "vee"];
+	version -> vpc [arrowhead = "vee"];
+	
+	role -> policy [arrowhead = "vee"];
+	version -> role [arrowhead = "vee"];
+}

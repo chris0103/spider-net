@@ -1,0 +1,43 @@
+digraph programming {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+		
+	message_oriented_middleware [label = "message-oriented middleware", style = "filled", fillcolor = "palegreen"];
+	message_queue [label = "message queue", style = "filled", fillcolor = "palegreen"];
+	messaging_pattern [label = "messaging pattern", style = "filled", fillcolor = "palegreen"];
+	publish_subscribe [label = "publish-subscribe", style = "filled", fillcolor = "palegreen"];
+	
+	programming_paradigm [label = "programming paradigm", style = "filled", fillcolor = "palegreen"];
+	stream_processing [label = "stream processing", style = "filled", fillcolor = "palegreen"];
+
+	/*	
+	
+	// configuration node
+	node [shape = "record", style = "rounded, filled"];
+	
+	subgraph cluster00 {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	
+	// item_name [label = "item_label", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// record_without_properties [shape = "record", label = "{<f0>label|<f1>value}"];
+	// record_with_properties [shape = "record", label = "{<f0>label|<f1>value|{{<f20>property|<f21>value}}}"];
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	// bean_record [label = "{<f0>beanId|<f1>beanClass|{{<f20>property1|<f21>property2}}}"];
+	*/
+	
+	publish_subscribe -> messaging_pattern [label = "is a"];
+	publish_subscribe -> message_oriented_middleware [arrowhead = "vee", label = "is part of"];
+	message_queue -> message_oriented_middleware [arrowhead = "vee", label = "is part of"];
+	
+	stream_processing -> programming_paradigm [label = "is a"];
+}
