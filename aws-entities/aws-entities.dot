@@ -55,6 +55,7 @@ digraph name {
 		nat_gateway [label = "NAT Gateway", style = "filled", fillcolor = "palegreen"];
 		route_table [label = "Route Table", style = "filled", fillcolor = "palegreen"];
 		subnet [label = "Subnet", style = "filled", fillcolor = "palegreen"];
+		virtual_private_gateway [label = "Virtual Private Gateway", style = "filled", fillcolor = "palegreen"];
 		vpc [label = "VPC", style = "filled", fillcolor = "palegreen"];
 	}
 	
@@ -91,6 +92,7 @@ digraph name {
 	vpc -> nat_gateway [arrowhead = "vee"];
 	nat_gateway -> subnet [arrowhead = "vee"];
 	vpc -> internet_gateway [arrowhead = "vee"];
+	vpc -> virtual_private_gateway [arrowhead = "vee"];
 	subnet -> route_table [arrowhead = "vee"];
 	msk_cluster -> vpc [arrowhead = "vee"];
 	instance -> vpc [arrowhead = "vee"];

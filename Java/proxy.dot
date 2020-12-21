@@ -1,0 +1,46 @@
+digraph proxy {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+    
+    InvocationHandler [label = "{<f0>InvocationHandler|<f2>+ invoke(Object, Method, Object[]) : Object\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+    Method [label = "{<f0>Method|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+    Proxy [label = "{<f0>Proxy|<f1>+ h : InvocationHandler\l|<f2>+ Proxy(InvocationHandler)\l&#537; getInvocationHandler(Object) : InvocationHandler\l&#537; getProxyClass(ClassLoader, Class&lt;?&gt;...) : Class&lt;?&gt;\l&#537; isProxyClass(Class&lt;?&gt;) : boolean\l&#537; newProxyInstance(ClassLoader, Class&lt;?&gt;[], InvocationHandler) : Object\l}", style = "rounded, filled", fillcolor = "springgreen"];
+    Serializable [shape = "plaintext", label = "Serializable"];
+	
+	/*	
+	
+	// configuration node
+	node [shape = "record", style = "rounded, filled"];
+	
+	subgraph cluster00 {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	
+	// item_name [label = "item_label", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// record_without_properties [shape = "record", label = "{<f0>label|<f1>value}"];
+	// record_with_properties [shape = "record", label = "{<f0>label|<f1>value|{{<f20>property|<f21>value}}}"];
+	
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	// bean_record [label = "{<f0>beanId|<f1>beanClass|{{<f20>property1|<f21>property2}}}"];
+	*/
+	
+	// item_foo -> item_bar;
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
+	
+	Proxy -> Serializable [arrowhead = "odot"];
+	Proxy:f1 -> InvocationHandler [arrowhead = "vee"];
+	InvocationHandler:f2 -> Method [arrowhead = "vee"];
+}
