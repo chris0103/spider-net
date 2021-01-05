@@ -1,46 +1,52 @@
-digraph name {
+digraph io {
 	rankdir = BT;
     fontname = "Verdana";
     fontsize = 12;
-    node [fontname = "Verdana", fontsize = 8, shape = "record"];
-    edge [fontname = "Verdana", fontsize = 8];
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
 	
 	subgraph cluster25 {
-		label = "hybrid";
+		label = "io";
 		style = filled;
 		color = grey90;
-	}	
-	
-	subgraph cluster50 {
-		label = "in";
-		style = filled;
-		color = grey90;
-		AutoCloseable [shape = "plaintext", label = "AutoCloseable"];
+		BufferedOutputStream [label = "{<f0>BufferedOutputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
 		ByteArrayInputStream [label = "{<f0>ByteArrayInputStream|<f1>+ buf : byte[]\l+ count : int\l+ mark : int\l+ pos : int\l|<f2>&#186; available() : int\l&#186; close() : void\l&#186; mark() : void\l&#186; markSupported() : boolean\l&#186; read(byte[], int, int) : int\l&#186; reset() : void\l&#186; skip(long) : long\l}", style = "rounded, filled", fillcolor = "springgreen"];
 		Closeable [label = "{<f0>Closeable|<f2>+ close() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		DataInput [label = "{<f0>DataInput|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		DataOutput [label = "{<f0>DataOutput|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		Externalizable [label = "{<f0>Externalizable|<f2>+ readExternal(ObjectInput) : void\l+ writeExternal(ObjectOutput) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		FileInputStream [label = "{<f0>FileInputStream|<f1>+ channel : FileChannel\l+ closed : boolean\l+ fd : FileDescriptor\l+ path : String\l|<f2>&#186; available() : int\l&#186; close() : void\l&#186; read(byte[]) : int\l&#186; read(byte[], int, int) : int\l&#186; skip(long) : long\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		FilterOutputStream [label = "{<f0>FilterOutputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
+		FileWriter [label = "{<f0>FileWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
+		Flushable [label = "{<f0>Flushable|<f2>+ flush() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		InputStream [label = "{<f0>InputStream||<f2>+ available() : int\l&#186; close() : void\l+ mark() : int\l+ markSupported() : boolean\l&#170; read() : int\l+ read(byte[]) : int\l+ read(byte[], int, int) : int\l+ reset() : void\l+ skip(long) : long\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		ObjectInput [label = "{<f0>ObjectInput|<f2>+ readObject() : Object\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ObjectInputStream [label = "{<f0>ObjectInputStream|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		ObjectOutput [label = "{<f0>ObjectOutput|<f2>+ writeObject(Object) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ObjectOutputStream [label = "{<f0>ObjectOutputStream|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		OutputStream [label = "{<f0>OutputStream||<f2>&#186; close() : void\l&#186; flush() : void\l&#170; write(int) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		OutputStreamWriter [label = "{<f0>OutputStreamWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
 		PipedInputStream [label = "{<f0>PipedInputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
+		PrintStream [label = "{<f0>PrintStream||}", style = "rounded, filled", fillcolor = "springgreen"];
+		PrintWriter [label = "{<f0>PrintWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
+		RandomAccessFile [label = "{<f0>RandomAccessFile|<f1>|<f2>+ read() : int\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		Serializable [label = "{<f0>Serializable|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		Writer [label = "{<f0>Writer||<f2>&#170; close() : void\l&#170; flush() : void\l&#170; write(char[], int, int) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 	}
 	
 	subgraph cluster75 {
-		label = "out";
+		label = "nio";
 		style = filled;
 		color = grey90;
+		AbstractInterruptibleChannel [label = "{<f0>AbstractInterruptibleChannel|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		ByteBuffer [label = "{<f0>ByteBuffer|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		Channel [label = "{<f0>Channel|<f2>+ close() : void\l+ isOpen() : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		FileChannel [label = "{<f0>FileChannel|<f1>|<f2>&#170; read(ByteBuffer, long) : int\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		SelectableChannel [label = "{<f0>SelectableChannel|<f1>|<f2>&#170; configureBlocking(boolean) : SelectableChannel\l+ register(Selector, int) : SelectionKey\l&#170; isBlocking() : boolean\l&#170; isRegistered() : boolean\l&#170; register(Selector, int, Object) : SelectionKey\l&#170; validOps() : int\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		SelectionKey [label = "{<f0>SelectionKey|<f1>|<f2>&#170; cancel() : void\l&#170; channel() : SelectableChannel\l&#170; interestOps() : int\l&#170; interestOps(int) : SelectionKey\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		Selector [label = "{<f0>Selector|<f1>|<f2>&#170; close() : void\l&#170; keys() : Set&lt;SelectionKey&gt;\l&#537; open() : Selector\l&#170; select() : int\l&#170; select(long) : int\l&#170; selectedKeys() : Set&lt;SelectionKey&gt;\l&#170; selectNow() : int\l&#170; wakeup() : Selector\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 	}
 	
-	Appendable [shape = "plaintext", label = "Appendable"];
-	BufferedOutputStream [label = "{<f0>BufferedOutputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
-	FileWriter [label = "{<f0>FileWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
-	FilterOutputStream [label = "{<f0>FilterOutputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
-	Flushable [label = "{<f0>Flushable|<f2>+ flush() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-	OutputStream [label = "{<f0>OutputStream||<f2>&#186; close() : void\l&#186; flush() : void\l&#170; write(int) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
-	OutputStreamWriter [label = "{<f0>OutputStreamWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
-	PrintStream [label = "{<f0>PrintStream||}", style = "rounded, filled", fillcolor = "springgreen"];
-	PrintWriter [label = "{<f0>PrintWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
-	Writer [label = "{<f0>Writer||<f2>&#170; close() : void\l&#170; flush() : void\l&#170; write(char[], int, int) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
-	
-	// other creatures
 	
 	// interface_minor [shape = "plaintext", label = "Interface_minor"];
 	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
@@ -59,23 +65,48 @@ digraph name {
 	InputStream -> Closeable [arrowhead = "empty"];
 	ByteArrayInputStream -> InputStream;
 	FileInputStream -> InputStream;
+	FileInputStream -> FileChannel [arrowhead = "vee"];
 	PipedInputStream -> InputStream;
 	
 	BufferedOutputStream -> FilterOutputStream;
 	FilterOutputStream -> OutputStream;
 	OutputStream -> Closeable [arrowhead = "empty"];
 	OutputStream -> Flushable [arrowhead = "empty"];
-	Closeable -> AutoCloseable [arrowhead = "odot"];
 	FileWriter -> OutputStreamWriter;
 	OutputStreamWriter -> Writer;
 	Writer -> Closeable [arrowhead = "empty"];
 	Writer -> Flushable [arrowhead = "empty"];
-	Writer -> Appendable [arrowhead = "odot"];
 	PrintStream -> FilterOutputStream;
 	PrintStream -> Closeable [arrowhead = "empty"];
-	PrintStream -> Appendable [arrowhead = "odot"];
 	PrintWriter -> Writer;
-
+	
+	// serialization
+	Externalizable -> Serializable;
+	Externalizable:f2 -> ObjectInput [arrowhead = "vee"];
+	ObjectInput -> DataInput;
+	Externalizable:f2 -> ObjectOutput [arrowhead = "vee"];
+	ObjectOutput -> DataOutput;
+	ObjectInputStream -> InputStream;
+	ObjectInputStream -> ObjectInput [arrowhead = "empty"];
+	ObjectOutputStream -> OutputStream;
+	ObjectOutputStream -> ObjectOutput [arrowhead = "empty"];
+	
+	RandomAccessFile -> DataInput [arrowhead = "empty"];
+	RandomAccessFile -> DataOutput [arrowhead = "empty"];
+	RandomAccessFile -> Closeable [arrowhead = "empty"];
+	
+	Channel -> Closeable;
+	AbstractInterruptibleChannel -> Channel [arrowhead = "empty"];
+	SelectableChannel -> AbstractInterruptibleChannel;
+	SelectableChannel -> Channel [arrowhead = "empty"];
+	SelectableChannel:f2 -> SelectionKey [arrowhead = "vee"];
+	SelectableChannel:f2 -> Selector [arrowhead = "vee"];
+	Selector -> Closeable [arrowhead = "empty"];
+	Selector:f2 -> SelectionKey [arrowhead = "vee"];
+	
+	
+	FileChannel -> AbstractInterruptibleChannel;
+	FileChannel:f2 -> ByteBuffer [arrowhead = "vee"];
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;	

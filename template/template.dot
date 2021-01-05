@@ -30,7 +30,8 @@ digraph name {
 	// item_foo -> item_bar;
 	
 	// Implementation -> Interface [arrowhead = "empty"];
-	// Subclass -> Class;	
+	// Subclass -> Class;
+	// SubInterface -> Interface;	
 	// Referer -> Referee [arrowhead = "vee"];
 	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
 	

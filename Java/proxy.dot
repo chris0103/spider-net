@@ -6,7 +6,7 @@ digraph proxy {
     edge [fontname = "Verdana", fontsize = 12];
     
     InvocationHandler [label = "{<f0>InvocationHandler|<f2>+ invoke(Object, Method, Object[]) : Object\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-    Method [label = "{<f0>Method|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+    Method [label = "{<f0>Method|<f1>+ exceptionTypes : Class&lt;?&gt;[]\l|<f2>+ getExceptionTypes() : Class&lt;?&gt;[]\l}", style = "rounded, filled", fillcolor = "springgreen"];
     Proxy [label = "{<f0>Proxy|<f1>+ h : InvocationHandler\l|<f2>+ Proxy(InvocationHandler)\l&#537; getInvocationHandler(Object) : InvocationHandler\l&#537; getProxyClass(ClassLoader, Class&lt;?&gt;...) : Class&lt;?&gt;\l&#537; isProxyClass(Class&lt;?&gt;) : boolean\l&#537; newProxyInstance(ClassLoader, Class&lt;?&gt;[], InvocationHandler) : Object\l}", style = "rounded, filled", fillcolor = "springgreen"];
     Serializable [shape = "plaintext", label = "Serializable"];
 	
