@@ -1,0 +1,50 @@
+digraph database {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+    
+    JdbcOperations [label = "{<f0>JdbcOperations|<f2>+ query(String, RowMapper&lt;T&gt;) : &lt;T&gt; List&lt;T&gt;\l+ query(String, RowMapper&lt;T&gt;, Object...) : &lt;T&gt; List&lt;T&gt;\l+ update(String, Object...) : int\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+    JdbcTemplate [label = "{<f0>JdbcTemplate|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+    
+    RowMapper [label = "{{<a>@FunctionalInterface|<f0>RowMapper&lt;T&gt;}|<f2>+ mapRow(ResultSet, int) : T\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];	
+	
+	/*	
+	
+	// configuration node
+	node [shape = "record", style = "rounded, filled"];
+	
+	subgraph cluster00 {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	
+	// item_name [label = "item_label", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// record_without_properties [shape = "record", label = "{<f0>label|<f1>value}"];
+	// record_with_properties [shape = "record", label = "{<f0>label|<f1>value|{{<f20>property|<f21>value}}}"];
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	// bean_record [label = "{<f0>beanId|<f1>beanClass|{{<f20>property1|<f21>property2}}}"];
+	// module_record [label = "{<f0>artifactId|<f1>projectName}"];
+	*/
+	
+	JdbcTemplate -> JdbcOperations [arrowhead = "empty"];
+	JdbcOperations -> RowMapper [arrowhead = "vee"];
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;
+	// SubInterface -> Interface;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
+	
+	// This is commented for dot to run, but it SHOULD BE uncommented as soon as dot works fine again
+	// ****************** dot cracks from below ******************** //
+	// ill link;
+	
+	// current is current_progress_item
+}
