@@ -1,20 +1,50 @@
-digraph database {
+digraph mvc {
 	rankdir = BT;
     fontname = "Verdana";
     fontsize = 12;
     node [fontname = "Verdana", fontsize = 12, shape = "record"];
     edge [fontname = "Verdana", fontsize = 12];
     
+    subgraph cluster15 {
+		label = "http";
+		style = filled;
+		color = grey90;
+		HttpEntity [label = "{<f0>HttpEntity&lt;T&gt;|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		ResponseEntity [label = "{<f0>ResponseEntity&lt;T&gt;|<f1>|<f2>+ ok(T) : ResponseEntity&lt;T&gt; &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		
+    }
     
-    GeneratedKeyHolder [label = "{<f0>GeneratedKeyHolder|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+    subgraph cluster25 {
+		label = "web";
+		style = filled;
+		color = grey90;
+		subgraph cluster25 {
+			label = "context";
+			style = filled;
+			color = grey85;
+			RequestAttributes [label = "{<f0>RequestAttributes|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			WebRequest [label = "{<f0>WebRequest|<f2>+ getUserPrincipal() : Principal\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		
+		}
+	    subgraph cluster75 {
+    		label = "method";
+			style = filled;
+			color = grey85;
+    		HandlerMethodArgumentResolver [label = "{<f0>HandlerMethodArgumentResolver|<f2>+ resolveArgument(MethodParameter, ModelAndViewContainer, NativeWebRequest, WebDataBinderFactory) : return_type\l+ supportsParameter(MethodParameter) : Object\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+    	}
+	}
+    subgraph cluster75 {
+		label = "webmvc";
+		style = filled;
+		color = grey90;
+		subgraph cluster50 {
+			label = "servlet";
+			style = filled;
+			color = grey85;
+			WebMvcConfigurerAdapter [label = "{<f0>WebMvcConfigurerAdapter|<f1>|<f2>+ addArgumentResolvers(List&lt;HandlerMethodArgumentResolver&gt;) : void\l+ addViewControllers(ViewControllerRegistry) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		}
+	}
     
-    JdbcOperations [label = "{<f0>JdbcOperations|<f2>+ query(String, RowMapper&lt;T&gt;) : &lt;T&gt; List&lt;T&gt;\l+ query(String, RowMapper&lt;T&gt;, Object...) : &lt;T&gt; List&lt;T&gt;\l+ update(PreparedStatementCreator, KeyHolder) : + int\l+ update(String, Object...) : int\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-    JdbcTemplate [label = "{<f0>JdbcTemplate|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-    KeyHolder [label = "{<f0>KeyHolder|<f2>+ getKey() : Number\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-    PreparedStatementCreator [label = "{{<a>@FunctionalInterface|<f0>PreparedStatementCreator}|<f2>+ createPreparedStatement(Connection) : PreparedStatement\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-    PreparedStatementCreatorFactory [label = "{<f0>PreparedStatementCreatorFactory|<f1>+ returnGeneratedKeys : boolean\l|<f2>+ PreparedStatementCreatorFactory(String, int...)\l+ newPreparedStatementCreator(List&lt;?&gt;) : PreparedStatementCreator\l}", style = "rounded, filled", fillcolor = "springgreen"];	
-    RowMapper [label = "{{<a>@FunctionalInterface|<f0>RowMapper&lt;T&gt;}|<f2>+ mapRow(ResultSet, int) : T\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];	
-	
 	/*	
 	
 	// configuration node
@@ -38,12 +68,11 @@ digraph database {
 	// module_record [label = "{<f0>artifactId|<f1>projectName}"];
 	*/
 	
-	JdbcTemplate -> JdbcOperations [arrowhead = "empty"];
-	JdbcOperations:f2 -> RowMapper [arrowhead = "vee"];
-	JdbcOperations:f2 -> PreparedStatementCreator [arrowhead = "vee"];
-	PreparedStatementCreatorFactory:f2 -> PreparedStatementCreator [arrowhead = "vee"];
-	JdbcOperations:f2 -> KeyHolder [arrowhead = "vee"];
-	GeneratedKeyHolder -> KeyHolder [arrowhead = "empty"];
+	ResponseEntity -> HttpEntity;
+	
+	WebMvcConfigurerAdapter:f2 -> HandlerMethodArgumentResolver [arrowhead = "vee"];
+	HandlerMethodArgumentResolver -> WebRequest:f2 [arrowhead = "vee"];
+	WebRequest -> RequestAttributes;
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;
