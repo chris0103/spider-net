@@ -5,15 +5,55 @@ digraph database {
     node [fontname = "Verdana", fontsize = 12, shape = "record"];
     edge [fontname = "Verdana", fontsize = 12];
     
-    
-    GeneratedKeyHolder [label = "{<f0>GeneratedKeyHolder|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-    
-    JdbcOperations [label = "{<f0>JdbcOperations|<f2>+ query(String, RowMapper&lt;T&gt;) : &lt;T&gt; List&lt;T&gt;\l+ query(String, RowMapper&lt;T&gt;, Object...) : &lt;T&gt; List&lt;T&gt;\l+ update(PreparedStatementCreator, KeyHolder) : + int\l+ update(String, Object...) : int\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-    JdbcTemplate [label = "{<f0>JdbcTemplate|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-    KeyHolder [label = "{<f0>KeyHolder|<f2>+ getKey() : Number\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-    PreparedStatementCreator [label = "{{<a>@FunctionalInterface|<f0>PreparedStatementCreator}|<f2>+ createPreparedStatement(Connection) : PreparedStatement\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-    PreparedStatementCreatorFactory [label = "{<f0>PreparedStatementCreatorFactory|<f1>+ returnGeneratedKeys : boolean\l|<f2>+ PreparedStatementCreatorFactory(String, int...)\l+ newPreparedStatementCreator(List&lt;?&gt;) : PreparedStatementCreator\l}", style = "rounded, filled", fillcolor = "springgreen"];	
-    RowMapper [label = "{{<a>@FunctionalInterface|<f0>RowMapper&lt;T&gt;}|<f2>+ mapRow(ResultSet, int) : T\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];	
+	subgraph cluster25 {
+		label = "data";
+		style = filled;
+		color = grey90;
+		
+		subgraph cluster50 {
+			label = "commons";
+			style = filled;
+			color = grey85;
+			CrudRepository [label = "{<f0>CrudRepository&lt;T, ID&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			Id [label = "{<f0>@Id|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			Repository [label = "{<f0>Repository&lt;T, ID&gt;|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		}
+	
+		subgraph cluster75 {
+			label = "relational";
+			style = filled;
+			color = grey85;
+			Column [label = "{<f0>@Column|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			Table [label = "{<f0>@Table|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		}
+	}
+	
+	subgraph cluster75 {
+		label = "jdbc";
+		style = filled;
+		color = grey90;
+		
+		subgraph cluster25 {
+			label = "core";
+			style = filled;
+			color = grey85;
+			JdbcOperations [label = "{<f0>JdbcOperations|<f2>+ query(String, RowMapper&lt;T&gt;) : &lt;T&gt; List&lt;T&gt;\l+ query(String, RowMapper&lt;T&gt;, Object...) : &lt;T&gt; List&lt;T&gt;\l+ update(PreparedStatementCreator, KeyHolder) : + int\l+ update(String, Object...) : int\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			JdbcTemplate [label = "{<f0>JdbcTemplate|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			PreparedStatementCreator [label = "{<f0>PreparedStatementCreator|<f2>+ createPreparedStatement(Connection) : PreparedStatement\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			PreparedStatementCreatorFactory [label = "{<f0>PreparedStatementCreatorFactory|<f1>+ returnGeneratedKeys : boolean\l|<f2>+ PreparedStatementCreatorFactory(String, int...)\l+ newPreparedStatementCreator(List&lt;?&gt;) : PreparedStatementCreator\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			RowMapper [label = "{<f0>RowMapper&lt;T&gt;|<f2>+ mapRow(ResultSet, int) : T\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		}
+		
+		subgraph cluster75 {
+			label = "support";
+			style = filled;
+			color = grey85;
+			GeneratedKeyHolder [label = "{<f0>GeneratedKeyHolder|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			KeyHolder [label = "{<f0>KeyHolder|<f2>+ getKey() : Number\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		}
+	}
+	
+	
 	
 	/*	
 	
@@ -44,6 +84,8 @@ digraph database {
 	PreparedStatementCreatorFactory:f2 -> PreparedStatementCreator [arrowhead = "vee"];
 	JdbcOperations:f2 -> KeyHolder [arrowhead = "vee"];
 	GeneratedKeyHolder -> KeyHolder [arrowhead = "empty"];
+	
+	CrudRepository -> Repository;
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;
