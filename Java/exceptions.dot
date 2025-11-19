@@ -1,0 +1,66 @@
+digraph exceptions {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+	
+
+	Throwable [label = "{<f0>Throwable|<f1>+ cause : Throwable\l+ detailMessage : String|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];	
+	
+	subgraph cluster25 {
+		label = "error";
+		style = filled;
+		color = grey90;
+		
+		Error [label = "{<f0>Error|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		OutOfMemoryError [label = "{<f0>OutOfMemoryError|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		StackOverflowError [label = "{<f0>StackOverflowError|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		VirtualMachineError [label = "{<f0>VirtualMachineError|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	}
+	
+	subgraph cluster75 {
+		label = "exception";
+		style = filled;
+		color = grey90;
+		
+		Exception [label = "{<f0>Exception|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		InvocationTargetException [label = "{<f0>InvocationTargetException|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		ReflectiveOperationException [label = "{<f0>ReflectiveOperationException|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	/*	
+	
+	// item_name [label = "item_label", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// record_without_properties [shape = "record", label = "{<f0>label|<f1>value}"];
+	// record_with_properties [shape = "record", label = "{<f0>label|<f1>value|{{<f20>property|<f21>value}}}"];
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	// bean_record [label = "{<f0>beanId|<f1>beanClass|{{<f20>property1|<f21>property2}}}"];
+	// module_record [label = "{<f0>artifactId|<f1>projectName}"];
+	*/
+	
+	Error -> Throwable;
+	VirtualMachineError -> Error;
+	OutOfMemoryError -> VirtualMachineError;
+	StackOverflowError -> VirtualMachineError;
+	
+	Exception -> Throwable;
+	ReflectiveOperationException -> Exception;
+	InvocationTargetException -> ReflectiveOperationException;
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;
+	// SubInterface -> Interface;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
+	
+	// This is commented for dot to run, but it SHOULD BE uncommented as soon as dot works fine again
+	// ****************** dot cracks from below ******************** //
+	// ill link;
+	
+	// current is current_progress_item
+}
