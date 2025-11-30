@@ -41,6 +41,10 @@ digraph mvc {
 			label = "servlet";
 			style = filled;
 			color = grey85;
+			AbstractLocaleContextResolver [label = "{<f0>AbstractLocaleContextResolver|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			AbstractLocaleResolver [label = "{<f0>AbstractLocaleResolver|<f1>+ defaultLocale : Locale\l|<f2>+ setDefaultLocale(Locale) : voie\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			LocaleResolver [label = "{<f0>LocaleResolver|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			SessionLocaleResolver [label = "{<f0>SessionLocaleResolver|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
 			WebMvcConfigurerAdapter [label = "{<f0>WebMvcConfigurerAdapter|<f1>|<f2>+ addArgumentResolvers(List&lt;HandlerMethodArgumentResolver&gt;) : void\l+ addViewControllers(ViewControllerRegistry) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 		}
 	}
@@ -73,6 +77,10 @@ digraph mvc {
 	WebMvcConfigurerAdapter:f2 -> HandlerMethodArgumentResolver [arrowhead = "vee"];
 	HandlerMethodArgumentResolver -> WebRequest:f2 [arrowhead = "vee"];
 	WebRequest -> RequestAttributes;
+	
+	AbstractLocaleResolver -> LocaleResolver [arrowhead = "empty"];
+	AbstractLocaleContextResolver -> AbstractLocaleResolver;
+	SessionLocaleResolver -> AbstractLocaleContextResolver;
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;
