@@ -1,0 +1,69 @@
+digraph name {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+	
+	
+	subgraph cluster25 {
+		label = "test";
+		style = filled;
+		color = grey90;
+		
+		subgraph cluster90 {
+			label = "web";
+			style = filled;
+			color = grey85;
+			AbstractMockMvcBuilder [label = "{<f0>AbstractMockMvcBuilder&lt;B extends AbstractMockMvcBuilder&lt;B&gt;&gt;|<f1>+ configurers : List&lt;MockMvcConfigurer&gt;\l|<f2>+ apply(MockMvcConfigurer) : T &lt;T extends B&gt;\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			ConfigurableMockMvcBuilder [label = "{<f0>ConfigurableMockMvcBuilder&lt;B extends ConfigurableMockMvcBuilder&lt;B&gt;&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			DefaultMockMvcBuilder [label = "{<f0>DefaultMockMvcBuilder|<f1>+ webAppContext : WebApplicationContext\l|<f2>+ DefaultMockMvcBuilder(WebApplicationContext)\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			MockMvcBuilder [label = "{<f0>MockMvcBuilder|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			MockMvcBuilders [label = "{<f0>MockMvcBuilders|<f1>|<f2>+ webAppContextSetup(WebApplicationContext) : DefaultMockMvcBuilder}", style = "rounded, filled", fillcolor = "springgreen"];
+			MockMvcBuilderSupport [label = "{<f0>MockMvcBuilderSupport|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			MockMvcConfigurer [label = "{<f0>MockMvcConfigurer|<f2>+ afterConfigurerAdded(ConfigurableMockMvcBuilder&lt;?&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		}
+	}
+	
+	subgraph cluster75 {
+		label = "web";
+		style = filled;
+		color = grey90;
+		WebApplicationContext [label = "{<f0>WebApplicationContext|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}
+	
+	/*	
+	
+	// item_name [label = "item_label", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// record_without_properties [shape = "record", label = "{<f0>label|<f1>value}"];
+	// record_with_properties [shape = "record", label = "{<f0>label|<f1>value|{{<f20>property|<f21>value}}}"];
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	// bean_record [label = "{<f0>beanId|<f1>beanClass|{{<f20>property1|<f21>property2}}}"];
+	// module_record [label = "{<f0>artifactId|<f1>projectName}"];
+	*/
+	
+	
+	MockMvcBuilders:f2 -> WebApplicationContext [arrowhead = "vee"];
+	MockMvcBuilders:f2 -> DefaultMockMvcBuilder [arrowhead = "vee"];
+	DefaultMockMvcBuilder -> AbstractMockMvcBuilder [label = "B = DefaultMockMvcBuilder"];
+	AbstractMockMvcBuilder -> MockMvcBuilderSupport;
+	AbstractMockMvcBuilder -> ConfigurableMockMvcBuilder [arrowhead = "empty"];
+	AbstractMockMvcBuilder -> MockMvcConfigurer [arrowhead = "vee"];
+	ConfigurableMockMvcBuilder -> MockMvcBuilder;
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;
+	// SubInterface -> Interface;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
+	
+	// This is commented for dot to run, but it SHOULD BE uncommented as soon as dot works fine again
+	// ****************** dot cracks from below ******************** //
+	// ill link;
+	
+	// current is current_progress_item
+}
