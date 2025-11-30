@@ -5,28 +5,41 @@ digraph exceptions {
     node [fontname = "Verdana", fontsize = 12, shape = "record"];
     edge [fontname = "Verdana", fontsize = 12];
 	
+	subgraph cluster50 {
+		label = "exceptions";
+		style = filled;
+		color = grey90;
 
-	Throwable [label = "{<f0>Throwable|<f1>+ cause : Throwable\l+ detailMessage : String|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];	
+		Throwable [label = "{<f0>Throwable|<f1>+ cause : Throwable\l+ detailMessage : String|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];	
 	
-	subgraph cluster25 {
-		label = "error";
-		style = filled;
-		color = grey90;
+		subgraph cluster25 {
+			label = "error";
+			style = filled;
+			color = grey85;
+			
+			Error [label = "{<f0>Error|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			OutOfMemoryError [label = "{<f0>OutOfMemoryError|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			StackOverflowError [label = "{<f0>StackOverflowError|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			VirtualMachineError [label = "{<f0>VirtualMachineError|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		}
 		
-		Error [label = "{<f0>Error|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-		OutOfMemoryError [label = "{<f0>OutOfMemoryError|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-		StackOverflowError [label = "{<f0>StackOverflowError|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-		VirtualMachineError [label = "{<f0>VirtualMachineError|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
-	}
-	
-	subgraph cluster75 {
-		label = "exception";
-		style = filled;
-		color = grey90;
-		
-		Exception [label = "{<f0>Exception|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-		InvocationTargetException [label = "{<f0>InvocationTargetException|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-		ReflectiveOperationException [label = "{<f0>ReflectiveOperationException|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		subgraph cluster75 {
+			label = "checked exception";
+			style = filled;
+			color = grey85;
+			
+			Exception [label = "{<f0>Exception|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			InvocationTargetException [label = "{<f0>InvocationTargetException|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			ReflectiveOperationException [label = "{<f0>ReflectiveOperationException|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			
+			subgraph cluster50 {
+				label = "unchecked exception";
+				style = filled;
+				color = grey80;
+				
+				RuntimeException [label = "{<f0>RuntimeException|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			}
+		}
 	}
 	
 	/*	
@@ -51,6 +64,7 @@ digraph exceptions {
 	Exception -> Throwable;
 	ReflectiveOperationException -> Exception;
 	InvocationTargetException -> ReflectiveOperationException;
+	RuntimeException -> Exception;
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;
