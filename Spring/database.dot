@@ -6,7 +6,7 @@ digraph database {
     edge [fontname = "Verdana", fontsize = 12];
     
 	subgraph cluster25 {
-		label = "data";
+		label = "spring-data";
 		style = filled;
 		color = grey90;
 		
@@ -15,7 +15,7 @@ digraph database {
 			style = filled;
 			color = grey85;
 			CrudRepository [label = "{<f0>CrudRepository&lt;T, ID&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-			Id [label = "{<f0>@Id|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			Id_SD [label = "{<f0>@Id|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 			Repository [label = "{<f0>Repository&lt;T, ID&gt;|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		}
 	
@@ -29,7 +29,7 @@ digraph database {
 	}
 	
 	subgraph cluster75 {
-		label = "jdbc";
+		label = "spring-jdbc";
 		style = filled;
 		color = grey90;
 		
@@ -51,6 +51,18 @@ digraph database {
 			GeneratedKeyHolder [label = "{<f0>GeneratedKeyHolder|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
 			KeyHolder [label = "{<f0>KeyHolder|<f2>+ getKey() : Number\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		}
+	}
+	
+	subgraph cluster85 {
+		label = "jpa";
+		style = filled;
+		color = grey90;
+		Entity [label = "{<f0>@Entity|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		Id_JPA [label = "{<f0>@Id|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		GeneratedValue [label = "{<f0>@GeneratedValue|<f2>+ strategy() : GenerationType\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ManyToMany [label = "{<f0>@ManyToMany|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		OneToMany [label = "{<f0>@OneToMany|<f2>+ cascade() : CascadeType[]\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		
 	}
 	
 	
