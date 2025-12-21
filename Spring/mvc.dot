@@ -30,7 +30,7 @@ digraph mvc {
     		label = "method";
 			style = filled;
 			color = grey85;
-    		HandlerMethodArgumentResolver [label = "{<f0>HandlerMethodArgumentResolver|<f2>+ resolveArgument(MethodParameter, ModelAndViewContainer, NativeWebRequest, WebDataBinderFactory) : return_type\l+ supportsParameter(MethodParameter) : Object\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+    		HandlerMethodArgumentResolver [label = "{<f0>HandlerMethodArgumentResolver|<f2>+ resolveArgument(MethodParameter, ModelAndViewContainer, NativeWebRequest, WebDataBinderFactory) : Object\l+ supportsParameter(MethodParameter) : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
     	}
 	}
     subgraph cluster75 {
@@ -45,7 +45,8 @@ digraph mvc {
 			AbstractLocaleResolver [label = "{<f0>AbstractLocaleResolver|<f1>+ defaultLocale : Locale\l|<f2>+ setDefaultLocale(Locale) : voie\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 			LocaleResolver [label = "{<f0>LocaleResolver|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 			SessionLocaleResolver [label = "{<f0>SessionLocaleResolver|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-			WebMvcConfigurerAdapter [label = "{<f0>WebMvcConfigurerAdapter|<f1>|<f2>+ addArgumentResolvers(List&lt;HandlerMethodArgumentResolver&gt;) : void\l+ addViewControllers(ViewControllerRegistry) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			WebMvcConfigurer [label = "{<f0>WebMvcConfigurer|<f2>+ addArgumentResolvers(List&lt;HandlerMethodArgumentResolver&lt;) : void\l+ addViewControllers(ViewControllerRegistry) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			WebMvcConfigurerAdapter [label = "{<f0>WebMvcConfigurerAdapter|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 		}
 	}
     
@@ -77,6 +78,7 @@ digraph mvc {
 	WebMvcConfigurerAdapter:f2 -> HandlerMethodArgumentResolver [arrowhead = "vee"];
 	HandlerMethodArgumentResolver -> WebRequest:f2 [arrowhead = "vee"];
 	WebRequest -> RequestAttributes;
+	WebMvcConfigurerAdapter -> WebMvcConfigurer [arrowhead = "empty"];
 	
 	AbstractLocaleResolver -> LocaleResolver [arrowhead = "empty"];
 	AbstractLocaleContextResolver -> AbstractLocaleResolver;
