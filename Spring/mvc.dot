@@ -4,16 +4,25 @@ digraph mvc {
     fontsize = 12;
     node [fontname = "Verdana", fontsize = 12, shape = "record"];
     edge [fontname = "Verdana", fontsize = 12];
-    
+
     subgraph cluster15 {
-		label = "http";
+		label = "context";
 		style = filled;
 		color = grey90;
-		HttpEntity [label = "{<f0>HttpEntity&lt;T&gt;|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-		ResponseEntity [label = "{<f0>ResponseEntity&lt;T&gt;|<f1>|<f2>+ ok(T) : ResponseEntity&lt;T&gt; &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		HierarchicalMessageSource [label = "{<f0>HierarchicalMessageSource|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		MessageSource [label = "{<f0>MessageSource|<f2>+ getMessage(String, Object[], Locale) : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		
-    }
-    
+		subgraph cluster1550 {
+			label = "support";
+			style = filled;
+			color = grey85;
+			AbstractMessageSource [label = "{<f0>AbstractMessageSource|<f1>+ useCodeAsDefaultMessage : boolean\l|<f2>&#186; getMessage(String, Object[], Locale) : String\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			AbstractResourceBasedMessageSource [label = "{<f0>AbstractResourceBasedMessageSource|<f1>+ basenameSet : Set&lt;String&gt;\l|<f2>+ addBasenames(String...) : void\l+ setBasenames(String...) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			MessageSourceSupport [label = "{<f0>MessageSourceSupport|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			ResourceBundleMessageSource [label = "{<f0>ResourceBundleMessageSource|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+		}
+	}
+
     subgraph cluster25 {
 		label = "web";
 		style = filled;
@@ -26,6 +35,15 @@ digraph mvc {
 			WebRequest [label = "{<f0>WebRequest|<f2>+ getUserPrincipal() : Principal\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		
 		}
+		
+    	subgraph cluster15 {
+			label = "http";
+			style = filled;
+			color = grey85;
+			HttpEntity [label = "{<f0>HttpEntity&lt;T&gt;|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			ResponseEntity [label = "{<f0>ResponseEntity&lt;T&gt;|<f1>|<f2>+ ok(T) : ResponseEntity&lt;T&gt; &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+    	}
+    	
 	    subgraph cluster75 {
     		label = "method";
 			style = filled;
@@ -33,6 +51,7 @@ digraph mvc {
     		HandlerMethodArgumentResolver [label = "{<f0>HandlerMethodArgumentResolver|<f2>+ resolveArgument(MethodParameter, ModelAndViewContainer, NativeWebRequest, WebDataBinderFactory) : Object\l+ supportsParameter(MethodParameter) : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
     	}
 	}
+	
     subgraph cluster75 {
 		label = "webmvc";
 		style = filled;
@@ -83,6 +102,12 @@ digraph mvc {
 	AbstractLocaleResolver -> LocaleResolver [arrowhead = "empty"];
 	AbstractLocaleContextResolver -> AbstractLocaleResolver;
 	SessionLocaleResolver -> AbstractLocaleContextResolver;
+	
+	ResourceBundleMessageSource -> AbstractResourceBasedMessageSource;
+	AbstractResourceBasedMessageSource -> AbstractMessageSource;
+	AbstractMessageSource -> MessageSourceSupport;
+	AbstractMessageSource -> HierarchicalMessageSource [arrowhead = "empty"];
+	HierarchicalMessageSource -> MessageSource;
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;
