@@ -18,10 +18,22 @@ digraph name {
 			AbstractMockMvcBuilder [label = "{<f0>AbstractMockMvcBuilder&lt;B extends AbstractMockMvcBuilder&lt;B&gt;&gt;|<f1>+ configurers : List&lt;MockMvcConfigurer&gt;\l|<f2>+ apply(MockMvcConfigurer) : T &lt;T extends B&gt;\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 			ConfigurableMockMvcBuilder [label = "{<f0>ConfigurableMockMvcBuilder&lt;B extends ConfigurableMockMvcBuilder&lt;B&gt;&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 			DefaultMockMvcBuilder [label = "{<f0>DefaultMockMvcBuilder|<f1>+ webAppContext : WebApplicationContext\l|<f2>+ DefaultMockMvcBuilder(WebApplicationContext)\l}", style = "rounded, filled", fillcolor = "springgreen"];
-			MockMvcBuilder [label = "{<f0>MockMvcBuilder|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			MockHttpServletRequestBuilder [label = "{<f0>MockHttpServletRequestBuilder|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+			MockMvc [label = "{<f0>MockMvc|<f1>|<f2>+ perform(RequestBuilder) : ResultActions\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+			MockMvcBuilder [label = "{<f0>MockMvcBuilder|<f2>+ build() : MockMvc\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 			MockMvcBuilders [label = "{<f0>MockMvcBuilders|<f1>|<f2>+ webAppContextSetup(WebApplicationContext) : DefaultMockMvcBuilder}", style = "rounded, filled", fillcolor = "springgreen"];
 			MockMvcBuilderSupport [label = "{<f0>MockMvcBuilderSupport|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 			MockMvcConfigurer [label = "{<f0>MockMvcConfigurer|<f2>+ afterConfigurerAdded(ConfigurableMockMvcBuilder&lt;?&gt;) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			MockMvcRequestBuilders [label = "{<f0>MockMvcRequestBuilders|<f1>|<f2>&#537; get(String, Object...) : MockHttpServletRequestBuilder\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			MockMvcResultMatchers [label = "{<f0>MockMvcResultMatchers|<f1>|<f2>&#537; model() : ModelResultMatchers\l&#537; status() : StatusResultMatchers\l&#537; view() : ViewResultMatchers\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			ConfigurableSmartRequestBuilder [label = "{<f0>ConfigurableSmartRequestBuilder&lt;B extends ConfigurableSmartRequestBuilder&lt;B&gt;&gt;|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			RequestBuilder [label = "{<f0>RequestBuilder|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ResultActions [label = "{<f0>ResultActions|<f2>+ andExpect(ResultMatcher) : ResultActions\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ResultMatcher [label = "{<f0>ResultMatcher|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			SmartRequestBuilder [label = "{<f0>SmartRequestBuilder|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ModelResultMatchers [label = "{<f0>ModelResultMatchers|<f1>|<f2>+ attribute(String, Matcher&lt;T&gt;) : ResultMatcher &lt;T&gt;\l+ attributeExists(String...) : ResultMatcher\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			StatusResultMatchers [label = "{<f0>StatusResultMatchers|<f1>|<f2>+ isOk() : ResultMatcher\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			ViewResultMatchers [label = "{<f0>ViewResultMatchers|<f1>|<f2>+ name(String) : ResultMatcher\l}", style = "rounded, filled", fillcolor = "springgreen"];
 		}
 	}
 	
@@ -41,7 +53,7 @@ digraph name {
 	// interface_minor [shape = "plaintext", label = "Interface_minor"];
 	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ field2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
-	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];	
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ field2 : type\l&#10765; final_field : type\l&#537; static_field : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
 	// bean_record [label = "{<f0>beanId|<f1>beanClass|{{<f20>property1|<f21>property2}}}"];
 	// module_record [label = "{<f0>artifactId|<f1>projectName}"];
 	*/
@@ -54,12 +66,27 @@ digraph name {
 	AbstractMockMvcBuilder -> ConfigurableMockMvcBuilder [arrowhead = "empty"];
 	AbstractMockMvcBuilder -> MockMvcConfigurer [arrowhead = "vee"];
 	ConfigurableMockMvcBuilder -> MockMvcBuilder;
+	MockMvcBuilder:f2 -> MockMvc [arrowhead = "vee"];
+	MockMvc:f2 -> RequestBuilder [arrowhead = "vee"];
+	MockMvc:f2 -> ResultActions [arrowhead = "vee"];
+	ResultActions:f2 -> ResultMatcher [arrowhead = "vee"];
+	SmartRequestBuilder -> RequestBuilder;
+	ConfigurableSmartRequestBuilder -> SmartRequestBuilder;
+	MockHttpServletRequestBuilder -> ConfigurableSmartRequestBuilder [arrowhead = "empty", label = "B = MockHttpServletRequestBuilder"];
+	MockMvcRequestBuilders:f2 -> MockHttpServletRequestBuilder [arrowhead = "vee"];
+	
+	MockMvcResultMatchers:f2 -> StatusResultMatchers [arrowhead = "vee"];
+	StatusResultMatchers:f2 -> ResultMatcher [arrowhead = "vee"];
+	MockMvcResultMatchers:f2 -> ViewResultMatchers [arrowhead = "vee"];
+	ViewResultMatchers:f2 -> ResultMatcher [arrowhead = "vee"];
+	MockMvcResultMatchers:f2 -> ModelResultMatchers [arrowhead = "vee"];
+	ModelResultMatchers:f2 -> ResultMatcher [arrowhead = "vee"];
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;
 	// SubInterface -> Interface;	
 	// Referer -> Referee [arrowhead = "vee"];
-	// Implementation -> InterfaceMinor [arrowhead = "odot"];	
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
 	
 	// This is commented for dot to run, but it SHOULD BE uncommented as soon as dot works fine again
 	// ****************** dot cracks from below ******************** //
