@@ -12,7 +12,7 @@ digraph io {
 		BufferedOutputStream [label = "{<f0>BufferedOutputStream||}", style = "rounded, filled", fillcolor = "springgreen"];
 		ByteArrayInputStream [label = "{<f0>ByteArrayInputStream|<f1>+ buf : byte[]\l+ count : int\l+ mark : int\l+ pos : int\l|<f2>&#186; available() : int\l&#186; close() : void\l&#186; mark() : void\l&#186; markSupported() : boolean\l&#186; read(byte[], int, int) : int\l&#186; reset() : void\l&#186; skip(long) : long\l}", style = "rounded, filled", fillcolor = "springgreen"];
 		Closeable [label = "{<f0>Closeable|<f2>+ close() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-		DataInput [label = "{<f0>DataInput|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		DataInput [label = "{<f0>DataInput|<f2>+ readUTF() : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		DataOutput [label = "{<f0>DataOutput|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		Externalizable [label = "{<f0>Externalizable|<f2>+ readExternal(ObjectInput) : void\l+ writeExternal(ObjectOutput) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		FileInputStream [label = "{<f0>FileInputStream|<f1>+ channel : FileChannel\l+ closed : boolean\l+ fd : FileDescriptor\l+ path : String\l|<f2>&#186; available() : int\l&#186; close() : void\l&#186; read(byte[]) : int\l&#186; read(byte[], int, int) : int\l&#186; skip(long) : long\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
@@ -22,7 +22,7 @@ digraph io {
 		InputStream [label = "{<f0>InputStream||<f2>+ available() : int\l&#186; close() : void\l+ mark() : int\l+ markSupported() : boolean\l&#170; read() : int\l+ read(byte[]) : int\l+ read(byte[], int, int) : int\l+ reset() : void\l+ skip(long) : long\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 		ObjectInput [label = "{<f0>ObjectInput|<f2>+ readObject() : Object\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		ObjectInputStream [label = "{<f0>ObjectInputStream|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
-		ObjectOutput [label = "{<f0>ObjectOutput|<f2>+ writeObject(Object) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ObjectOutput [label = "{<f0>ObjectOutput|<f2>+ writeObject(Object) : void\l+ writeUTF(String) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		ObjectOutputStream [label = "{<f0>ObjectOutputStream|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
 		OutputStream [label = "{<f0>OutputStream||<f2>&#186; close() : void\l&#186; flush() : void\l&#170; write(int) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 		OutputStreamWriter [label = "{<f0>OutputStreamWriter||}", style = "rounded, filled", fillcolor = "springgreen"];
@@ -95,7 +95,8 @@ digraph io {
 	RandomAccessFile -> DataOutput [arrowhead = "empty"];
 	RandomAccessFile -> Closeable [arrowhead = "empty"];
 	
-	Channel -> Closeable;
+	// Channel -> Closeable;
+	Closeable -> Channel [dir = "back"];
 	AbstractInterruptibleChannel -> Channel [arrowhead = "empty"];
 	SelectableChannel -> AbstractInterruptibleChannel;
 	SelectableChannel -> Channel [arrowhead = "empty"];
