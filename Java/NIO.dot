@@ -1,0 +1,90 @@
+digraph io {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 12];
+	
+	subgraph cluster10 {
+		label = "app";
+		style = filled;
+		color = grey90;
+		NIOClient [label = "{<f0>NIOClient|<f1>+ selector : Selector\l|<f2>+ initClient(String, int) : void\l+ listen() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		NIOServer [label = "{<f0>NIOServer|<f1>+ selector : Selector\l|<f2>+ initServer(int) : void\l+ listen(int) : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	subgraph cluster25 {
+		label = "net";
+		style = filled;
+		color = grey90;
+		ServerSocket [label = "{<f0>ServerSocket|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ bind(SocketAddress) : void\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	subgraph cluster50 {
+		label = "nio";
+		style = filled;
+		color = grey90;
+		
+		subgraph cluster50 {
+			label = "channels";
+			style = filled;
+			color = grey85;
+			Channel [label = "{<f0>Channel|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			Closeable [shape = "plaintext", label = "Closeable"];
+			InterruptibleChannel [label = "{<f0>InterruptibleChannel|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			NetworkChannel [label = "{<f0>NetworkChannel|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			SelectableChannel [label = "{<f0>SelectableChannel|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; configureBlocking(boolean) : SelectableChannel\l&#537; static_method() : return_type\l+ register(Selector, int) : SelectionKey\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			SelectionKey [label = "{<f0>SelectionKey|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			Selector [label = "{<f0>Selector|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#537; open() : Selector\l&#170; select() : int\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			ServerSocketChannel [label = "{<f0>ServerSocketChannel|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; socket() : ServerSocket\l&#537; open() : ServerSocketChannel\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		
+			subgraph cluster50 {
+				label = "spi";
+				style = filled;
+				color = grey80;
+				AbstractInterruptibleChannel [label = "{<f0>AbstractInterruptibleChannel|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+				AbstractSelectableChannel [label = "{<f0>AbstractSelectableChannel|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l&#186; configureBlocking(boolean) : SelectableChannel\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			}
+		
+		}
+	}
+
+	
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	
+	/*
+	subgraph cluster {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	*/
+
+	NIOServer:f1 -> Selector [arrowhead = "vee"];
+	Selector -> Closeable [arrowhead = "odot"];
+	NIOServer:f2 -> ServerSocketChannel [arrowhead = "vee"];
+	ServerSocketChannel -> AbstractSelectableChannel;
+	AbstractSelectableChannel -> SelectableChannel;
+	SelectableChannel -> AbstractInterruptibleChannel;
+	AbstractInterruptibleChannel -> Channel [arrowhead = "empty"];
+	AbstractInterruptibleChannel -> InterruptibleChannel [arrowhead = "empty"];
+	InterruptibleChannel -> Channel;
+	Channel -> Closeable [arrowhead = "odot"];
+	SelectableChannel -> Channel [arrowhead = "empty"];
+	SelectableChannel:f2 -> SelectionKey [arrowhead = "vee"];
+	ServerSocketChannel -> NetworkChannel [arrowhead = "empty"];
+	NetworkChannel -> Channel;
+	ServerSocketChannel -> ServerSocket [arrowhead = "vee"];
+	
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
+	
+	
+	// current is current_progress_item
+}
