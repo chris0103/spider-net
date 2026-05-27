@@ -17,33 +17,42 @@ digraph io {
 		label = "net";
 		style = filled;
 		color = grey90;
-		ServerSocket [label = "{<f0>ServerSocket|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ bind(SocketAddress) : void\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		ServerSocket [label = "{<f0>ServerSocket|<f1>|<f2>+ bind(SocketAddress) : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
 	}
 	
 	subgraph cluster50 {
 		label = "nio";
 		style = filled;
 		color = grey90;
+		Buffer [label = "{<f0>Buffer|<f1>|<f2>&#170; array() : Object\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		ByteBuffer [label = "{<f0>ByteBuffer|<f1>|<f2>&#537; allocate(int) : ByteBuffer\l&#186; array() : Object\l&#537; wrap(byte[]) : ByteBuffer\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		Comparable [shape = "plaintext", label = "Comparable&lt;T&gt;"];
 		
 		subgraph cluster50 {
 			label = "channels";
 			style = filled;
 			color = grey85;
-			Channel [label = "{<f0>Channel|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ByteChannel [label = "{<f0>ByteChannel|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			Channel [label = "{<f0>Channel|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 			Closeable [shape = "plaintext", label = "Closeable"];
-			InterruptibleChannel [label = "{<f0>InterruptibleChannel|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-			NetworkChannel [label = "{<f0>NetworkChannel|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
-			SelectableChannel [label = "{<f0>SelectableChannel|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; configureBlocking(boolean) : SelectableChannel\l&#537; static_method() : return_type\l+ register(Selector, int) : SelectionKey\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
-			SelectionKey [label = "{<f0>SelectionKey|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
-			Selector [label = "{<f0>Selector|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#537; open() : Selector\l&#170; select() : int\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
-			ServerSocketChannel [label = "{<f0>ServerSocketChannel|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; socket() : ServerSocket\l&#537; open() : ServerSocketChannel\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			GatheringByteChannel [label = "{<f0>GatheringByteChannel|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			InterruptibleChannel [label = "{<f0>InterruptibleChannel|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			NetworkChannel [label = "{<f0>NetworkChannel|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ReadableByteChannel [label = "{<f0>ReadableByteChannel|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			ScatteringByteChannel [label = "{<f0>ScatteringByteChannel|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			SelectableChannel [label = "{<f0>SelectableChannel|<f1>|<f2>&#170; configureBlocking(boolean) : SelectableChannel\l+ register(Selector, int) : SelectionKey\l&#170; register(Selector, int, Object) : SelectionKey\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			SelectionKey [label = "{<f0>SelectionKey|<f1>|<f2>&#170; channel() : SelectableChannel\l+ isAcceptable() : boolean\l+ isConnectable() : boolean\l+ isReadable() : boolean\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			Selector [label = "{<f0>Selector|<f1>|<f2>&#537; open() : Selector\l&#170; select() : int\l&#170; selectedKeys() : Set&lt;SelectionKey&gt;\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			ServerSocketChannel [label = "{<f0>ServerSocketChannel|<f1>|<f2>&#170; accept() : SocketChannel\l&#170; socket() : ServerSocket\l&#537; open() : ServerSocketChannel\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			SocketChannel [label = "{<f0>SocketChannel|<f1>|<f2>&#170; connect(SocketAddress) : boolean\l&#170; finishConnect() : boolean\l&#170; isConnectionPending() : boolean\l&#537; open() : SocketChannel\l&#170; read(ByteBuffer) : int\l&#170; write(ByteBuffer) : int\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			WritableByteChannel [label = "{<f0>WritableByteChannel|<f2>}", style = "rounded, filled", fillcolor = "mediumpurple1"];
 		
 			subgraph cluster50 {
 				label = "spi";
 				style = filled;
 				color = grey80;
-				AbstractInterruptibleChannel [label = "{<f0>AbstractInterruptibleChannel|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
-				AbstractSelectableChannel [label = "{<f0>AbstractSelectableChannel|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l&#186; configureBlocking(boolean) : SelectableChannel\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+				AbstractInterruptibleChannel [label = "{<f0>AbstractInterruptibleChannel|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+				AbstractSelectableChannel [label = "{<f0>AbstractSelectableChannel|<f1>|<f2>&#186; configureBlocking(boolean) : SelectableChannel\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
 			}
 		
 		}
@@ -65,6 +74,7 @@ digraph io {
 
 	NIOServer:f1 -> Selector [arrowhead = "vee"];
 	Selector -> Closeable [arrowhead = "odot"];
+	Selector:f2 -> SelectionKey [arrowhead = "vee"];
 	NIOServer:f2 -> ServerSocketChannel [arrowhead = "vee"];
 	ServerSocketChannel -> AbstractSelectableChannel;
 	AbstractSelectableChannel -> SelectableChannel;
@@ -75,9 +85,28 @@ digraph io {
 	Channel -> Closeable [arrowhead = "odot"];
 	SelectableChannel -> Channel [arrowhead = "empty"];
 	SelectableChannel:f2 -> SelectionKey [arrowhead = "vee"];
+	SelectionKey:f2 -> SelectableChannel [arrowhead = "vee"];
 	ServerSocketChannel -> NetworkChannel [arrowhead = "empty"];
 	NetworkChannel -> Channel;
 	ServerSocketChannel -> ServerSocket [arrowhead = "vee"];
+	NIOServer:f2 -> ByteBuffer [arrowhead = "vee"];
+	ByteBuffer -> Buffer;
+	ByteBuffer -> Comparable [arrowhead = "odot", label = "T = ByteBuffer"];
+	
+	NIOClient:f2 -> SocketChannel [arrowhead = "vee"];
+	SocketChannel -> AbstractSelectableChannel;
+	SocketChannel -> NetworkChannel [arrowhead = "empty"];
+	SocketChannel -> ByteChannel [arrowhead = "empty"];
+	ByteChannel -> ReadableByteChannel;
+	ReadableByteChannel -> Channel;
+	ByteChannel -> WritableByteChannel;
+	WritableByteChannel -> Channel;
+	SocketChannel -> ScatteringByteChannel [arrowhead = "empty"];
+	ScatteringByteChannel -> ReadableByteChannel;
+	SocketChannel -> GatheringByteChannel [arrowhead = "empty"];
+	GatheringByteChannel -> WritableByteChannel;
+	NIOClient:f1 -> Selector [arrowhead = "vee"];
+	NIOClient:f2 -> ByteBuffer [arrowhead = "vee"];
 	
 	
 	// Implementation -> Interface [arrowhead = "empty"];

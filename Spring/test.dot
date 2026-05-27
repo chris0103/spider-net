@@ -9,11 +9,39 @@ digraph name {
 		label = "app";
 		style = filled;
 		color = grey90;
-		MockMvcWebTests [label = "{<f0>MockMvcWebTests|<f1>+ mockMvc : MockMvc\l+ webContext : WebApplicationContext\l|<f2>+ setupMockMvc() : void\l+ homePage() : void\l+ homePage_unauthenticatedUser() : void\l+ postBook() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		MockMvcWebTests [label = "{<f0>MockMvcWebTests|<f1>+ mockMvc : MockMvc\l+ webContext : WebApplicationContext\l|<f2>+ setupMockMvc() : void\l+ homePage() : void\l+ homePage_authenticatedUser() : void\l+ homePage_unauthenticatedUser() : void\l+ postBook() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		SimpleWebTest [label = "{<f0>SimpleWebTest|<f1>|<f2>}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	subgraph cluster15 {
+		label = "spring-security";
+		style = filled;
+		color = grey90;
+		
+		subgraph cluster50 {
+			label = "test";
+			style = filled;
+			color = grey85;
+			WithMockUser [label = "{<f0>@WithMockUser|<f2>+ password() : String\l+ roles() : String[]\l+ username() : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			WithUserDetails [label = "{<f0>@WithUserDetails|<f2>+ value() : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		}
+	}
+	
+	subgraph cluster20 {
+		label = "spring-boot";
+		style = filled;
+		color = grey90;
+		
+		subgraph cluster50 {
+			label = "test";
+			style = filled;
+			color = grey85;
+			WebIntegrationTest [label = "{<f0>@WebIntegrationTest|<f2>+ randomPort() : boolean\l+ value() : String[]\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		}
 	}
 	
 	subgraph cluster25 {
-		label = "test";
+		label = "spring-test";
 		style = filled;
 		color = grey90;
 		
@@ -96,6 +124,10 @@ digraph name {
 	ModelResultMatchers:f2 -> ResultMatcher [arrowhead = "vee"];
 	MockMvcResultMatchers:f2 -> HeaderResultMatchers [arrowhead = "vee"];
 	HeaderResultMatchers:f2 -> ResultMatcher [arrowhead = "vee"];
+	
+	MockMvcWebTests:f2 -> WithMockUser [arrowhead = "vee"];
+	MockMvcWebTests:f2 -> WithUserDetails [arrowhead = "vee"];
+	SimpleWebTest -> WebIntegrationTest [arrowhead = "vee"];
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;
