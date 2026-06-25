@@ -27,6 +27,21 @@ digraph mvc {
 		label = "web";
 		style = filled;
 		color = grey90;
+		subgraph cluster15 {
+			label = "client";
+			style = filled;
+			color = grey85;
+			RestOperations [label = "{<f0>RestOperations|<f2>+ getForObject(String, Class&lt;T&gt;, Object...) : T &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+			RestTemplate [label = "{<f0>RestTemplate|<f1>|<f2>&#186; getForObject(String, Class&lt;T&gt;, Object...) : T &lt;T&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+			
+			subgraph cluster50 {
+				label = "support";
+				style = filled;
+				color = grey80;
+				HttpAccessor [label = "{<f0>HttpAccessor|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+				InterceptingHttpAccessor [label = "{<f0>InterceptingHttpAccessor|<f1>|<f2>}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+			}	
+		}
 		subgraph cluster25 {
 			label = "context";
 			style = filled;
@@ -36,7 +51,7 @@ digraph mvc {
 		
 		}
 		
-    	subgraph cluster15 {
+    	subgraph cluster55 {
 			label = "http";
 			style = filled;
 			color = grey85;
@@ -108,6 +123,10 @@ digraph mvc {
 	AbstractMessageSource -> MessageSourceSupport;
 	AbstractMessageSource -> HierarchicalMessageSource [arrowhead = "empty"];
 	HierarchicalMessageSource -> MessageSource;
+	
+	RestTemplate -> InterceptingHttpAccessor;
+	InterceptingHttpAccessor -> HttpAccessor;
+	RestTemplate -> RestOperations [arrowhead = "empty"];
 	
 	// Implementation -> Interface [arrowhead = "empty"];
 	// Subclass -> Class;
