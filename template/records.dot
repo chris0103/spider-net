@@ -2,14 +2,14 @@ digraph name {
 	rankdir = BT;
     fontname = "Verdana";
 	// fontname = "Microsoft YaHei";	// Chinese characters
-    fontsize = 8;
-    node [fontname = "Verdana", fontsize = 8, shape = "record"];
-    edge [fontname = "Verdana", fontsize = 8];
+    fontsize = 12;
+    node [fontname = "Verdana", fontsize = 12, shape = "record", style = "rounded, filled"];
+    edge [fontname = "Verdana", fontsize = 12];
 	
 	/*
 	Chinese characters
-	node [fontname = "Microsoft YaHei", fontsize = 8, shape = "record"];
-	edge [fontname = "Microsoft YaHei", fontsize = 8];
+	node [fontname = "Microsoft YaHei", fontsize = 12, shape = "record"];
+	edge [fontname = "Microsoft YaHei", fontsize = 12];
 	*/
 	
 	/*
@@ -19,8 +19,10 @@ digraph name {
 		color = grey90;
 	}
 	
-	// item_name [label = "item_lable", style = "rounded, filled", fillcolor = "palegreen"];
+	// item_name [label = "item_label", style = "filled", fillcolor = "palegreen"];
 	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+	// record_without_properties [shape = "record", label = "{<f0>label|<f1>value}"];
+	// record_with_properties [shape = "record", label = "{<f0>label|<f1>value|{{<f20>property|<f21>value}}}"];
 
 	*/
 	
