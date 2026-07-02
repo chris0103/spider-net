@@ -19,7 +19,7 @@ digraph name {
 		color = grey90;
 	}
 	
-	// item_name [label = "item_label", style = "filled", fillcolor = "palegreen"];
+	// item_name [label = "item_label", fillcolor = "palegreen"];
 	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
 	// record_without_properties [shape = "record", label = "{<f0>label|<f1>value}"];
 	// record_with_properties [shape = "record", label = "{<f0>label|<f1>value|{{<f20>property|<f21>value}}}"];
