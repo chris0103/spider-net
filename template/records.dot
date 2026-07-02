@@ -1,0 +1,34 @@
+digraph name {
+	rankdir = BT;
+    fontname = "Verdana";
+	// fontname = "Microsoft YaHei";	// Chinese characters
+    fontsize = 8;
+    node [fontname = "Verdana", fontsize = 8, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 8];
+	
+	/*
+	Chinese characters
+	node [fontname = "Microsoft YaHei", fontsize = 8, shape = "record"];
+	edge [fontname = "Microsoft YaHei", fontsize = 8];
+	*/
+	
+	/*
+	subgraph cluster {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+	
+	// item_name [label = "item_lable", style = "filled", fillcolor = "palegreen"];
+	// record_name [shape = "record", label = "{{<f0>interface|{<f10>(other implementers)}}|(other methods)}"];
+
+	*/
+	
+	// item_foo -> item_bar;
+	
+	// This is commented for dot to run, but it SHOULD BE uncommented as soon as dot works fine again
+	// ****************** dot cracks from below ******************** //
+	// ill link;
+	
+	// current is current_progress_item
+}
