@@ -1,0 +1,66 @@
+digraph core {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 8;
+    node [fontname = "Verdana", fontsize = 8, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 8];
+	
+	subgraph cluster28 {
+		label = "core";
+		style = filled;
+		color = grey90;
+		AbstractEnvironment [label = "{<f0>AbstractEnvironment|<f1>+ propertyResolver : ConfigurablePropertyResolver\l+ propertySources : MutablePropertySources\l|<f2>+ resolveRequiredPlaceholders(String) : String\l+ validateRequiredProperties() : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractPropertyResolver [label = "{<f0>AbstractPropertyResolver|<f1>&#170; getPropertyAsRawString(String) : String\l+ placeholderPrefix : String\l+ placeholderSuffix : String\l+ strictHelper : PropertyPlaceholderHelper\l+ valueSeparator : String\l|<f2>+ resolveRequiredPlaceholders(String) : String\l+ validateRequiredProperties() : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		ConfigurableEnvironment [label = "{<f0>ConfigurableEnvironment|<f2>+ merge(ConfigurableEnvironment) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ConfigurablePropertyResolver [label = "{<f0>ConfigurablePropertyResolver|<f2>+ validateRequiredProperties() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		DefaultResourceLoader [label = "{<f0>DefaultResourceLoader||}", style = "rounded, filled", fillcolor = "springgreen"];
+		Environment [label = "{<f0>Environment|<f2>+ acceptsProfiles(String...) : boolean\l+ getActiveProfiles() : String[]\l+ getDefaultProfiles() : String[]\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		EnvironmentCapable [label = "{<f0>EnvironmentCapable|<f2>+ getEnvironment() : Environment\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		MutablePropertySources [label = "{<f0>MutablePropertySources||}", style = "rounded, filled", fillcolor = "springgreen"];
+		PathMatchingResourcePatternResolver [label = "{<f0>PathMatchingResourcePatternResolver|<f1>+ resourceLoader : ResourceLoader\l|<f2>+ PathMatchingResourcePatternResolver(ResourceLoader)\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		PropertiesLoaderSupport [label = "{<f0>PropertiesLoaderSupport||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		PropertyPlaceholderHelper [label = "{<f0>PropertyPlaceholderHelper|<f1>+ ignoreUnresolvablePlaceholders : boolean\l+ placeholderPrefix : String\l+ placeholderSuffix : String\l+ simplePrefix : String\l+ valueSeparator : String\l|<f2>+ PropertyPlaceholderHelper(String, String, String, boolean)\l+ parseStringValue(String, PlaceholderResolver, Set&lt;String&gt;) : String\l+ replacePlaceholders(String, PlaceholderResolver) : String\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		PropertyResolver [label = "{<f0>PropertyResolver|<f2>+ containsProperty(String) : boolean\l+ getProperty(String) : String\l+ getProperty(String, Class&lt;T&gt;) : T &lt;T&gt;\l+ getProperty(String, Class&lt;T&gt;, T) : T &lt;T&gt;\l+ getProperty(String, String) : String\l+ getPropertyAsClass(String, Class&lt;T&gt;) : Class&lt;T&gt; &lt;T&gt;\l+ getRequiredProperty(String) : String\l+ getRequiredProperty(String, Class&lt;T&gt;) : T &lt;T&gt;\l+ resolveRequiredPlaceholders(String) : String\l+ resolveRequiredPlaceholders(String) : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		PropertySources [label = "{<f0>PropertySources|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		PropertySourcesPropertyResolver [label = "{<f0>PropertySourcesPropertyResolver||}", style = "rounded, filled", fillcolor = "springgreen"];
+		ResourceLoader [label = "{<f0>ResourceLoader|<f2>+ getResources(String) : Resource\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ResourcePatternResolver [label = "{<f0>ResourcePatternResolver|<f2>+ getResources(String) : Resource[]\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		StandardEnvironment [label = "{<f0>StandardEnvironment||}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	
+	/*
+	subgraph cluster {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+
+	*/
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
+	
+	ResourcePatternResolver -> ResourceLoader;
+	DefaultResourceLoader -> ResourceLoader [arrowhead = "empty"];
+	PathMatchingResourcePatternResolver -> ResourcePatternResolver [arrowhead = "empty"];
+	Environment -> PropertyResolver;
+	EnvironmentCapable:f2 -> Environment [arrowhead = "vee"];
+	StandardEnvironment -> AbstractEnvironment;
+	AbstractEnvironment -> ConfigurableEnvironment [arrowhead = "empty"];
+	ConfigurableEnvironment -> Environment;
+	ConfigurableEnvironment -> ConfigurablePropertyResolver;
+	ConfigurablePropertyResolver -> PropertyResolver;
+	AbstractPropertyResolver -> ConfigurablePropertyResolver [arrowhead = "empty"];
+	AbstractPropertyResolver:f1 -> PropertyPlaceholderHelper [arrowhead = "vee"];
+	PropertySourcesPropertyResolver -> AbstractPropertyResolver;
+	AbstractEnvironment:f1 -> PropertySourcesPropertyResolver [arrowhead = "vee"];
+	AbstractEnvironment:f1 -> MutablePropertySources [arrowhead = "vee"];
+	MutablePropertySources -> PropertySources [arrowhead = "empty"];
+}

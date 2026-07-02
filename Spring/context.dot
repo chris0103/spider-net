@@ -1,0 +1,169 @@
+digraph context {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 8;
+    node [fontname = "Verdana", fontsize = 8, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 8];
+	
+	subgraph cluster03 {
+		label = "aop";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster13 {
+		label = "beans";
+		style = filled;
+		color = grey90;
+		BeanDefinitionRegistry [label = "{<f0>BeanDefinitionRegistry|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		BeanNameGenerator [label = "{<f0>BeanNameGenerator|<f2>+ generateBeanName(BeanDefinition, BeanDefinitionRegistry) : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ConfigurableListableBeanFactory [label = "{<f0>ConfigurableListableBeanFactory|<f2>+ preInstantiateSingletons() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		DefaultListableBeanFactory [label = "{<f0>DefaultListableBeanFactory||}", style = "rounded, filled", fillcolor = "springgreen"];
+		HierarchicalBeanFactory [label = "{<f0>HierarchicalBeanFactory|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ListableBeanFactory [label = "{<f0>ListableBeanFactory|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		PlaceholderConfigurerSupport [label = "{<f0>PlaceholderConfigurerSupport||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		PropertyPlaceholderConfigurer [label = "{<f0>PropertyPlaceholderConfigurer||}", style = "rounded, filled", fillcolor = "springgreen"];
+		PropertyResourceConfigurer [label = "{<f0>PropertyResourceConfigurer||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		XmlBeanDefinitionReader [label = "{<f0>XmlBeanDefinitionReader||}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	subgraph cluster18 {
+		label = "context";
+		style = filled;
+		color = grey90;
+		AbstractApplicationContext [label = "{<f0>AbstractApplicationContext|<f1>+ environment : ConfigurableEnvironment\l+ id : String\l+ lifecycleProcessor : LifecycleProcessor\l+ parent : ApplicationContext\l+ resourcePatternResolver : ResourcePatternResolver\l|<f2>+ AbstractApplicationContext()\l+ AbstractApplicationContext(ApplicationContext)\l+ createEnvironment() : ConfigurableEnvironment\l+ finishBeanFactoryInitialization(ConfigurableListableBeanFactory) : void\l+ finishRefresh() : void\l+ getBean(Class&lt;T&gt;) : T &lt;T&gt;\l&#170; getBeanFactory() : ConfigurableListableBeanFactory\l+ getResourcePatternResolver() : ResourcePatternResolver\l+ getResources(String) : Resource[]\l+ initApplicationEventMulticaster() : void\l+ initLifecycleProcessor() : void\l+ initMessageSource() : void\l+ initPropertySources() : void\l+ invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory) : void\l+ obtainFreshBeanFactory() : ConfigurableListableBeanFactory\l+ postProcessBeanFactory(ConfigurableListableBeanFactory) : void\l+ prepareBeanFactory(ConfigurableListableBeanFactory) : void\l+ prepareRefresh() : void\l+ refresh() : void\l+ registerBeanPostProcessors(ConfigurableListableBeanFactory) : void\l+ registerListeners() : void\l&#170; refreshBeanFactory() : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractMessageSource [label = "{<f0>AbstractMessageSource||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractRefreshableApplicationContext [label = "{<f0>AbstractRefreshableApplicationContext|<f1>+ beanFactory : DefaultListableBeanFactory\l|<f2>+ AbstractRefreshableApplicationContext(ApplicationContext)\l+ createBeanFactory() : DefaultListableBeanFactory\l+ customizeBeanFactory(DefaultListableBeanFactory) : void\l+ getBeanFactory() : ConfigurableListableBeanFactory\l+ refreshBeanFactory() : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractRefreshableConfigApplicationContext [label = "{<f0>AbstractRefreshableConfigApplicationContext|<f1>+ configLocations : String[]\l|<f2>+ AbstractRefreshableConfigApplicationContext(ApplicationContext)\l&#170; loadBeanDefinitions(DefaultListableBeanFactory) : void\l+ resolvePath(String) : String\l+ setConfigLocations(String[]) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractXmlApplicationContext [label = "{<f0>AbstractXmlApplicationContext||<f2>+ AbstractXmlApplicationContext(ApplicationContext)\l+ loadBeanDefinitions(DefaultListableBeanFactory) : void\l+ loadBeanDefinitions(XmlBeanDefinitionReader) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AnnotationBeanNameGenerator [label = "{<f0>AnnotationBeanNameGenerator||<f2>+ buildDefaultBeanName(BeanDefinition) : String\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		AnnotationConfigApplicationContext [label = "{<f0>AnnotationConfigApplicationContext||}", style = "rounded, filled", fillcolor = "springgreen"];
+		AnnotationScopeMetadataResolver [label = "{<f0>AnnotationScopeMetadataResolver||}", style = "rounded, filled", fillcolor = "springgreen"];
+		ApplicationContext [label = "{<f0>ApplicationContext|<f2>+ getId() : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ApplicationEventPublisher [label = "{<f0>ApplicationEventPublisher|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ClassPathXmlApplicationContext [label = "{<f0>ClassPathXmlApplicationContext||<f2>+ClassPathXmlApplicationContext(String)\l+ClassPathXmlApplicationContext(String[], boolean, ApplicationContext)\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		ConfigurableApplicationContext [label = "{<f0>ConfigurableApplicationContext|<f2>+ getBeanFactory() : ConfigurableListableBeanFactory\l+ getEnvironment() : ConfigurableEnvironment\l+ refresh() : void\l+ setParent(ApplicationContext) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		DefaultLifecycleProcessor [label = "{<f0>DefaultLifecycleProcessor|<f1>+ beanFactory : ConfigurableListableBeanFactory\l+ running : boolean\l|<f2>+ startBeans(boolean) : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		FileSystemXmlApplicationContext [label = "{<f0>FileSystemXmlApplicationContext||}", style = "rounded, filled", fillcolor = "springgreen"];
+		GenericApplicationContext [label = "{<f0>GenericApplicationContext||}", style = "rounded, filled", fillcolor = "springgreen"];
+		HierarchicalMessageSource [label = "{<f0>HierarchicalMessageSource|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		Jsr330ScopeMetadataResolver [label = "{<f0>Jsr330ScopeMetadataResolver||}", style = "rounded, filled", fillcolor = "springgreen"];
+		Lifecycle [label = "{<f0>Lifecycle|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		LifecycleProcessor [label = "{<f0>LifecycleProcessor|<f2>+ onRefresh() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		MessageSource [label = "{<f0>MessageSource|<f2>+ getMessage(String, Object[], Locale) : String\l+ getMessage(String, Object[], String, Locale) : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		MessageSourceSupport [label = "{<f0>MessageSourceSupport||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		PropertySourcesPlaceholderConfigurer [label = "{<f0>PropertySourcesPlaceholderConfigurer|<f1>+ appliedPropertySources : PropertySources\l+ environment : Environment\l+ propertySources : MutablePropertySources\l|<f2>+ processProperties(ConfigurableListableBeanFactory, ConfigurablePropertyResolver) : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		ScopeMetadataResolver [label = "{<f0>ScopeMetadataResolver|<f2>+ resolveScopeMetadata(BeanDefinition) : ScopeMetadata\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}
+	
+	subgraph cluster28 {
+		label = "core";
+		style = filled;
+		color = grey90;
+		AbstractEnvironment [label = "{<f0>AbstractEnvironment||<f2>+ resolveRequiredPlaceholders(String) : String\l+ validateRequiredProperties() : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		ConfigurableEnvironment [label = "{<f0>ConfigurableEnvironment|<f2>+ merge(ConfigurableEnvironment) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ConfigurablePropertyResolver [label = "{<f0>ConfigurablePropertyResolver|<f2>+ validateRequiredProperties() : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		DefaultResourceLoader [label = "{<f0>DefaultResourceLoader||}", style = "rounded, filled", fillcolor = "springgreen"];
+		EnvironmentCapable [label = "{<f0>EnvironmentCapable|<f2>+ getEnvironment() : Environment\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		MutablePropertySources [label = "{<f0>MutablePropertySources||}", style = "rounded, filled", fillcolor = "springgreen"];
+		PathMatchingResourcePatternResolver [label = "{<f0>PathMatchingResourcePatternResolver|<f1>+ resourceLoader : ResourceLoader\l|<f2>+ PathMatchingResourcePatternResolver(ResourceLoader)\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		PropertiesLoaderSupport [label = "{<f0>PropertiesLoaderSupport||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		PropertyResolver [label = "{<f0>PropertyResolver|<f2>+ resolveRequiredPlaceholders(String) : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		PropertySources [label = "{<f0>PropertySources|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ResourceLoader [label = "{<f0>ResourceLoader|<f2>+ getResources(String) : Resource\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ResourcePatternResolver [label = "{<f0>ResourcePatternResolver|<f2>+ getResources(String) : Resource[]\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		StandardEnvironment [label = "{<f0>StandardEnvironment||}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+
+	subgraph cluster33 {
+		label = "expression";
+		style = filled;
+		color = grey90;
+	}
+	
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	
+	/*
+	subgraph cluster {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+
+	*/
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
+	
+	/** application context **/
+	ApplicationContext -> EnvironmentCapable;
+	ApplicationContext -> ListableBeanFactory;
+	ApplicationContext -> HierarchicalBeanFactory;
+	ApplicationContext -> MessageSource;
+	ApplicationContext -> ApplicationEventPublisher;
+	ApplicationContext -> ResourcePatternResolver;
+	ResourcePatternResolver -> ResourceLoader;
+	ConfigurableApplicationContext -> ApplicationContext;
+	ConfigurableApplicationContext:f2 -> ConfigurableListableBeanFactory [arrowhead = "vee"];
+	ConfigurableListableBeanFactory -> ListableBeanFactory;	
+	AbstractApplicationContext -> ConfigurableApplicationContext [arrowhead = "empty"];
+	GenericApplicationContext -> AbstractApplicationContext;
+	GenericApplicationContext -> BeanDefinitionRegistry [arrowhead = "empty"];
+	AnnotationConfigApplicationContext -> GenericApplicationContext;
+	AbstractRefreshableApplicationContext -> AbstractApplicationContext;
+	AbstractRefreshableApplicationContext:f1 -> DefaultListableBeanFactory [arrowhead = "vee"];
+	DefaultListableBeanFactory -> ConfigurableListableBeanFactory [arrowhead = "empty"];
+	DefaultListableBeanFactory -> BeanDefinitionRegistry [arrowhead = "empty"];
+	AbstractRefreshableConfigApplicationContext -> AbstractRefreshableApplicationContext;
+	AbstractXmlApplicationContext -> AbstractRefreshableConfigApplicationContext;
+	AbstractXmlApplicationContext:f2 -> XmlBeanDefinitionReader [arrowhead = "vee"];
+	ClassPathXmlApplicationContext -> AbstractXmlApplicationContext;
+	FileSystemXmlApplicationContext -> AbstractXmlApplicationContext;
+	
+	/** property resolver **/
+	AbstractApplicationContext:f1 -> StandardEnvironment [arrowhead = "vee"];
+	StandardEnvironment -> AbstractEnvironment;
+	AbstractEnvironment -> ConfigurableEnvironment [arrowhead = "empty"];
+	ConfigurableEnvironment -> ConfigurablePropertyResolver;
+	ConfigurablePropertyResolver -> PropertyResolver;
+	
+	/** resource resolver **/
+	AbstractApplicationContext:f1 -> PathMatchingResourcePatternResolver [arrowhead = "vee"];
+	PathMatchingResourcePatternResolver -> ResourcePatternResolver [arrowhead = "empty"];
+	PathMatchingResourcePatternResolver:f1 -> AbstractApplicationContext [arrowhead = "vee"];
+	AbstractApplicationContext -> DefaultResourceLoader;
+	DefaultResourceLoader -> ResourceLoader [arrowhead = "empty"];
+	
+	/** lifecyle **/
+	AbstractApplicationContext:f1 -> DefaultLifecycleProcessor [arrowhead = "vee"];
+	DefaultLifecycleProcessor:f1 -> ConfigurableListableBeanFactory [arrowhead = "vee"];
+	DefaultLifecycleProcessor -> LifecycleProcessor [arrowhead = "empty"];
+	LifecycleProcessor -> Lifecycle;
+	
+	/** placeholder configurer **/
+	PropertySourcesPlaceholderConfigurer -> PlaceholderConfigurerSupport;
+	PlaceholderConfigurerSupport -> PropertyResourceConfigurer;
+	PropertyResourceConfigurer -> PropertiesLoaderSupport;
+	PropertyPlaceholderConfigurer -> PlaceholderConfigurerSupport;
+	PropertySourcesPlaceholderConfigurer:f1 -> PropertySources [arrowhead = "vee"];
+	MutablePropertySources -> PropertySources [arrowhead = "empty"];
+	PropertySourcesPlaceholderConfigurer:f1 -> MutablePropertySources [arrowhead = "vee"];
+	PropertySourcesPlaceholderConfigurer:f2 -> ConfigurablePropertyResolver [arrowhead = "vee"];
+	
+	/** message sources **/
+	HierarchicalMessageSource -> MessageSource;
+	AbstractMessageSource -> HierarchicalMessageSource [arrowhead = "empty"];
+	AbstractMessageSource -> MessageSourceSupport;
+	
+	/** name generator **/
+	AnnotationBeanNameGenerator -> BeanNameGenerator [arrowhead = "empty"];
+	
+	// scope resolver
+	AnnotationScopeMetadataResolver -> ScopeMetadataResolver [arrowhead = "empty"];
+	Jsr330ScopeMetadataResolver -> ScopeMetadataResolver [arrowhead = "empty"];
+}

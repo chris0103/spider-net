@@ -1,0 +1,91 @@
+digraph context {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 8;
+	nodesep = .1;
+	ranksep = .3;
+    node [fontname = "Verdana", fontsize = 8, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 8];
+
+	subgraph cluster18 {
+		label = "hierarchy of application contexts";
+		style = filled;
+		fontname = "Verdana Bold";
+		color = grey90;
+		AbstractApplicationContext [label = "{<f0>AbstractApplicationContext}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractRefreshableApplicationContext [label = "{<f0>AbstractRefreshableApplicationContext}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractRefreshableConfigApplicationContext [label = "{<f0>AbstractRefreshableConfigApplicationContext}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractRefreshableWebApplicationContext [label = "{<f0>AbstractRefreshableWebApplicationContext}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractXmlApplicationContext [label = "{<f0>AbstractXmlApplicationContext}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AnnotationConfigApplicationContext [label = "{<f0>AnnotationConfigApplicationContext}", style = "rounded, filled", fillcolor = "springgreen", fontname = "Verdana Bold", fontcolor ="red"];
+		AnnotationConfigWebApplicationContext [label = "{<f0>AnnotationConfigWebApplicationContext}", style = "rounded, filled", fillcolor = "springgreen", fontname = "Verdana Bold", fontcolor ="red"];
+		ApplicationContext [label = "{<f0>ApplicationContext}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ClassPathXmlApplicationContext [label = "{<f0>ClassPathXmlApplicationContext}", style = "rounded, filled", fillcolor = "springgreen", fontname = "Verdana Bold", fontcolor ="red"];
+		ConfigurableApplicationContext [label = "{<f0>ConfigurableApplicationContext}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		ConfigurableWebApplicationContext [label = "{<f0>ConfigurableWebApplicationContext}", style = "rounded, filled", fillcolor = "mediumpurple1"];		
+		DefaultLifecycleProcessor [label = "{<f0>DefaultLifecycleProcessor}", style = "rounded, filled", fillcolor = "springgreen"];
+		FileSystemXmlApplicationContext [label = "{<f0>FileSystemXmlApplicationContext}", style = "rounded, filled", fillcolor = "springgreen", fontname = "Verdana Bold", fontcolor ="red"];
+		GenericApplicationContext [label = "{<f0>GenericApplicationContext}", style = "rounded, filled", fillcolor = "springgreen"];
+		Lifecycle [label = "{<f0>Lifecycle}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		LifecycleProcessor [label = "{<f0>LifecycleProcessor}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		WebApplicationContext [label = "{<f0>WebApplicationContext}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}
+	
+	subgraph cluster50 {
+	
+					label = "";
+		style = filled;
+		fontname = "Verdana Bold";
+		color = grey90;
+		DriverManagerDataSource [label = "{<f0>DriverManagerDataSource}", style = "rounded, filled", fillcolor = "springgreen"];
+		EmbeddedDataSource [label = "{<f0>EmbeddedDataSource}", style = "rounded, filled", fillcolor = "springgreen"];
+		JdbcTemplate [label = "{<f0>JdbcTemplate}", style = "rounded, filled", fillcolor = "springgreen"];
+		MyJdbcRepository [label = "{<f0>MyJdbcRepository}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	
+	/*
+	subgraph cluster {
+		label = "";
+		style = filled;
+		color = grey90;
+	}
+
+	*/
+	
+	MyJdbcRepository -> JdbcTemplate [arrowhead = "vee"];
+	JdbcTemplate -> EmbeddedDataSource [arrowhead = "vee", label = "embedded"];
+	JdbcTemplate -> DriverManagerDataSource [arrowhead = "vee", label = "JDBC"];
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
+	
+	/** application context **/
+	ConfigurableApplicationContext -> ApplicationContext;
+	AbstractApplicationContext -> ConfigurableApplicationContext [arrowhead = "empty"];
+	GenericApplicationContext -> AbstractApplicationContext;
+	AnnotationConfigApplicationContext -> GenericApplicationContext;
+	AbstractRefreshableApplicationContext -> AbstractApplicationContext;
+	AbstractRefreshableConfigApplicationContext -> AbstractRefreshableApplicationContext;
+	AbstractXmlApplicationContext -> AbstractRefreshableConfigApplicationContext;
+	ClassPathXmlApplicationContext -> AbstractXmlApplicationContext;
+	FileSystemXmlApplicationContext -> AbstractXmlApplicationContext;
+	
+	AbstractRefreshableWebApplicationContext -> AbstractRefreshableConfigApplicationContext;
+	AbstractRefreshableWebApplicationContext -> ConfigurableWebApplicationContext [arrowhead = "empty"];
+	ConfigurableWebApplicationContext -> ConfigurableApplicationContext;
+	ConfigurableWebApplicationContext -> WebApplicationContext;
+	WebApplicationContext -> ApplicationContext;
+	AnnotationConfigWebApplicationContext -> AbstractRefreshableWebApplicationContext;
+	
+	/** lifecyle **/
+	AbstractApplicationContext -> DefaultLifecycleProcessor [arrowhead = "vee"];
+	DefaultLifecycleProcessor -> LifecycleProcessor [arrowhead = "empty"];
+	LifecycleProcessor -> Lifecycle;
+}

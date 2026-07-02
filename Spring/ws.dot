@@ -1,0 +1,146 @@
+digraph name {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 8;
+    node [fontname = "Verdana", fontsize = 8, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 8];
+	
+	subgraph cluster13 {
+		label = "beans";
+		style = filled;
+		color = grey90;
+		FactoryBean [label = "{<f0>FactoryBean&lt;T&gt;|<f2>+ getObject() : T\l+ getObjectType() : Class&lt;?&gt;\l+ isSingleton() : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}
+
+	subgraph cluster18 {
+		label = "context";
+		style = filled;
+		color = grey90;
+		RemoteAccessor [label = "{<f0>RemoteAccessor|<f1>+ serviceInterface : Class&lt;?&gt;\l|}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		RemoteExporter [label = "{<f0>RemoteExporter|<f1>+ registerTraceInterceptor : Boolean\l+ interceptors : Object[]\l+ service : Object\l+ serviceInterface : Class&lt;?&gt;\l|}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		RemoteInvocationBasedAccessor [label = "{<f0>RemoteInvocationBasedAccessor|<f1>+ remoteInvocationFactory : RemoteInvocationFactory\l|<f2>+ recreateRemoteInvocationResult(RemoteInvocationResult) : Object\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		RemoteInvocationBasedExporter [label = "{<f0>RemoteInvocationBasedExporter|<f1>+ remoteInvocationExecutor : RemoteInvocationExecutor\l|<f2>+ invoke(RemoteInvocation, Object) : Object\l+ invokeAndCreateResult(RemoteInvocation, Object) : RemoteInvocationResult\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		RemoteInvocationSerializingExporter [label = "{<f0>RemoteInvocationSerializingExporter|<f1>+ proxy : Object\l|<f2>+ createObjectInputStream(InputStream) : ObjectInputStream\l+ createObjectOutputStream(OutputStream) : ObjectOutputStream\l+ doReadRemoteInvocation(ObjectInputStream) : RemoteInvocation\l+ doWriteRemoteInvocationResult(RemoteInvocationResult, ObjectOutputStream) : void\l+ prepare() : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		RemotingSupport [label = "{<f0>RemotingSupport||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		RmiBasedExporter [label = "{<f0>RmiBasedExporter||<f2>+ getObjectToExport() : Remote\l&#186; invoke(RemoteInvocation, Object) : Object\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		RmiClientInterceptor [label = "{<f0>RmiClientInterceptor|<f1>+ registryClientSocketFactory : RMIClientSocketFactory\l|<f2>+ doInvoke(MethodInvocation, Remote) : Object\l+ doInvoke(MethodInvocation, RmiInvocationHandler) : Object\l+ getStub() : Remote\l+ lookupStub() : Remote\l+ prepare() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		RmiProxyFactoryBean [label = "{<f0>RmiProxyFactoryBean|<f1>+ serviceProxy : Object\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		RmiServiceExporter [label = "{<f0>RmiServiceExporter|<f1>+ registryHost : String\l+ registryPort : int\l+ serviceName : String\l+ servicePort : int\l|<f2>+ prepare() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		UrlBasedRemoteAccessor [label = "{<f0>UrlBasedRemoteAccessor|<f1>+ serviceUrl : String\l|}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	}
+
+	subgraph cluster23 {
+		label = "context-support";
+		style = filled;
+		color = grey90;
+	}
+	
+	subgraph cluster28 {
+		label = "core";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster54 {
+		label = "oxm";
+		style = filled;
+		color = grey90;
+	}
+	
+	subgraph cluster77 {
+		label = "web";
+		style = filled;
+		color = grey90;
+		AbstractJaxWsServiceExporter [label = "{<f0>AbstractJaxWsServiceExporter||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		HessianClientInterceptor [label = "{<f0>HessianClientInterceptor|<f1>+ hessianProxy : Object\l+ proxyFactory : HessianProxyFactory\l|<f2>+ createHessianProxy(HessianProxyFactory) : Object\l+ prepare() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		HessianExporter [label = "{<f0>HessianExporter|<f1>+ remoteResolver : HessianRemoteResolver\l+ skeleton : HessianSkeleton\l|<f2>+ doInvoke(HessianSkeleton, InputStream, OutputStream) : void\l+ invoke(InputStream, outputStream) : void\l+ prepare() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		HessianServiceExporter [label = "{<f0>HessianServiceExporter||}", style = "rounded, filled", fillcolor = "springgreen"];
+		HessianProxyFactoryBean [label = "{<f0>HessianProxyFactoryBean|<f1>+ serviceProxy : Object\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		HttpInvokerClientConfiguration [label = "{<f0>HttpInvokerClientConfiguration|<f2>+ getCodebaseUrl() : String\l+ getServiceUrl() : String\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		HttpInvokerClientInterceptor [label = "{<f0>HttpInvokerClientInterceptor|<f1>+ codebaseUrl : String\l+ httpInvokerRequestExecutor : HttpInvokerRequestExecutor\l|<f2>+ executeRequest(RemoteInvocation) : RemoteInvocationResult\l+ executeRequest(RemoteInvocation, MethodInvocation) : RemoteInvocationResult\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		HttpInvokerProxyFactoryBean [label = "{<f0>HttpInvokerProxyFactoryBean|<f1>+ serviceProxy : Object\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		HttpInvokerServiceExporter [label = "{<f0>HttpInvokerServiceExporter||}", style = "rounded, filled", fillcolor = "springgreen"];
+		HttpRequestHandler [label = "{<f0>HttpRequestHandler|<f2>+ handleRequest(HttpServletRequest, HttpServletResponse) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		JaxWsPortClientInterceptor [label = "{<f0>JaxWsPortClientInterceptor|<f1>+ portName : String\l+ serviceInterface : Class&lt;?&gt;\l|<f2>+ doInvoke(MethodInvocation) : Object\l+ doInvoke(MethodInvocation, Object) : Object\l+ prepare() : void\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		JaxWsPortProxyFactoryBean [label = "{<f0>JaxWsPortProxyFactoryBean|<f1>+ serviceProxy : Object\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		LocalJaxWsServiceFactory [label = "{<f0>LocalJaxWsServiceFactory|<f1>+ namespaceUri : String\l+ serviceName : String\l+ wsdlDocumentUrl : URL\l|<f2>+ createJaxWsService() : Service\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		SimpleJaxWsServiceExporter [label = "{<f0>SimpleJaxWsServiceExporter|<f1>+ baseAddress : String\l|<f2>+ calculateEndpointAddress(Endpoint, String) : String\l}", style = "rounded, filled", fillcolor = "springgreen"];
+	}	
+
+	subgraph cluster81 {
+		label = "webmvc";
+		style = filled;
+		color = grey90;
+	}
+	
+	subgraph cluster91 {
+		label = "ws-core";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster93 {
+		label = "ws-security";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster95 {
+		label = "ws-support";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster97 {
+		label = "ws-test";
+		style = filled;
+		color = grey90;
+	}	
+	
+	subgraph cluster99 {
+		label = "xml";
+		style = filled;
+		color = grey90;
+	}	
+	
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
+
+	/** various web service exporters **/
+	RmiServiceExporter -> RmiBasedExporter;
+	RmiBasedExporter -> RemoteInvocationBasedExporter;
+	RemoteInvocationBasedExporter -> RemoteExporter;
+	RemoteExporter -> RemotingSupport;
+	HessianServiceExporter -> HttpRequestHandler [arrowhead = "empty"];
+	HessianServiceExporter -> HessianExporter;
+	HessianExporter -> RemoteExporter;
+	HttpInvokerServiceExporter -> HttpRequestHandler [arrowhead = "empty"];
+	HttpInvokerServiceExporter -> RemoteInvocationSerializingExporter;
+	RemoteInvocationSerializingExporter -> RemoteInvocationBasedExporter;
+	SimpleJaxWsServiceExporter -> AbstractJaxWsServiceExporter;
+	
+	/** various web service proxies for client **/
+	RmiProxyFactoryBean -> FactoryBean [arrowhead = "empty", label = "T = Object"];
+	RmiProxyFactoryBean -> RmiClientInterceptor;
+	RmiClientInterceptor -> RemoteInvocationBasedAccessor;
+	RemoteInvocationBasedAccessor -> UrlBasedRemoteAccessor;
+	UrlBasedRemoteAccessor -> RemoteAccessor;
+	RemoteAccessor -> RemotingSupport;
+	HessianProxyFactoryBean -> FactoryBean [arrowhead = "empty", label = "T = Object"];
+	HessianProxyFactoryBean -> HessianClientInterceptor;
+	HessianClientInterceptor -> UrlBasedRemoteAccessor;
+	HttpInvokerProxyFactoryBean -> HttpInvokerClientInterceptor;
+	HttpInvokerClientInterceptor -> HttpInvokerClientConfiguration [arrowhead = "empty"];
+	HttpInvokerClientInterceptor -> RemoteInvocationBasedAccessor;
+	JaxWsPortProxyFactoryBean -> FactoryBean [arrowhead = "empty", label = "T = Object"];
+	JaxWsPortProxyFactoryBean -> JaxWsPortClientInterceptor;
+	JaxWsPortClientInterceptor -> LocalJaxWsServiceFactory;
+}

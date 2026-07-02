@@ -1,0 +1,236 @@
+digraph security {
+	rankdir = BT;
+    fontname = "Verdana";
+    fontsize = 8;
+    node [fontname = "Verdana", fontsize = 8, shape = "record"];
+    edge [fontname = "Verdana", fontsize = 8];
+	
+	subgraph cluster48 {
+		label = "jdbc";
+		style = filled;
+		color = grey90;
+		JdbcDaoSupport [label = "{<f0>JdbcDaoSupport||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	}	
+	
+	subgraph cluster67 {
+		label = "security-acl";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster68 {
+		label = "security-cas";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster69 {
+		label = "security-config";
+		style = filled;
+		color = grey90;
+		AbstractAuthenticationFilterConfigurer [label = "{<f0>AbstractAuthenticationFilterConfigurer&lt;B extends HttpSecurityBuilder&lt;B&gt;,T extends AbstractAuthenticationFilterConfigurer&lt;B,T,F&gt;, F extends AbstractAuthenticationProcessingFilter&gt;|<f1>+ authenticationEntryPoint : LoginUrlAuthenticationEntryPoint\l+ authFilter : F\l+ loginPage : String\l|<f2>&#186; init() : B\l+ loginPage(String) : T\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractAuthenticationProcessingFilter [label = "{<f0>AbstractAuthenticationProcessingFilter||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractConfigAttributeRequestMatcherRegistry [label = "{<f0>AbstractConfigAttributeRequestMatcherRegistry&lt;C&gt;|<f1>+ unmappedMatchers : List&lt;RequestMatcher&gt;\l|<f2>&#186; chainRequestMatchers(List&lt;RequestMatcher&gt;) : C\l&#170; chainRequestMatchersInternal(List&lt;RequestMatcher&gt;) : C\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractConfiguredSecurityBuilder [label = "{<f0>AbstractConfiguredSecurityBuilder&lt;O, B extends SecurityBuilder&lt;O&gt;&gt;|<f1>+ configurers : LinkedHashMap&lt;Class&lt;? extends SecurityConfigurer&lt;O, B&gt;&gt;, List&lt;SecurityConfigurer&lt;O, B&gt;&gt;&gt;\l|<f2>+ apply(C) : C &lt;C extends SecurityConfigurer&lt;O, B&gt;&gt;\l+ apply(C) : C &lt;C extends SecurityConfigurerAdapter&lt;O, B&gt;&gt;\l+ beforeConfigure() : void\l&#186; doBuild() : O\l&#170; performBuild() : O\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractDaoAuthenticationConfigurer [label = "{<f0>AbstractDaoAuthenticationConfigurer&lt;B extends ProviderManagerBuilder&lt;B&gt;, C extends AbstractDaoAuthenticationConfigurer&lt;B,C,U&gt;, U extends UserDetailsService&gt;|<f1>+ provider : DaoAuthenticationProvider\l+ userDetailsService : U\l|<f2>&#186; getUserDetailsService() : U\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractHttpConfigurer [label = "{<f0>AbstractHttpConfigurer&lt;T extends AbstractHttpConfigurer&lt;T, B&gt;,B extends HttpSecurityBuilder&lt;B&gt;&gt;||<f2>+ disable() : B\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractInterceptUrlConfigurer [label = "{<f0>AbstractInterceptUrlConfigurer&lt;C extends AbstractInterceptUrlConfigurer&lt;C,H&gt;, H extends HttpSecurityBuilder&lt;H&gt;&gt;||{{<f30>AbstractInterceptUrlRegistry&lt;R extends AbstractInterceptUrlRegistry&lt;R,T&gt;,T&gt;|<f31>|<f32>}}}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractRequestMatcherRegistry [label = "{<f0>AbstractRequestMatcherRegistry&lt;C&gt;||<f2>+ antMatchers(String...) : C\l+ antMatchers(HttpMethod, String...) : C\l+ anyRequest() : C\l&#170; chainRequestMatchers(List&lt;RequestMatcher&gt;) : C\l+ regexMatchers(String...) : C\l+ regexMatchers(HttpMethod, String...) : C\l+ requestMatchers(RequestMatcher...) : C\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AbstractSecurityBuilder [label = "{<f0>AbstractSecurityBuilder&lt;O&gt;||<f2>&#186; build() : O\l&#170; doBuild() : O\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		// AnonymousConfigurer [label = "{<f0>AnonymousConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		AuthenticationManagerBuilder [label = "{<f0>AuthenticationManagerBuilder|<f1>+ defaultUserDetailsService : UserDetailsService\l|<f2>+ inMemoryAuthentication() : InMemoryUserDetailsManagerConfigurer&lt;AuthenticationManagerBuilder&gt;\l+ jdbcAuthentication() : JdbcUserDetailsManagerConfigurer&lt;AuthenticationManagerBuilder&gt;\l+ ldapAuthentication() : LdapAuthenticationProviderConfigurer&lt;AuthenticationManagerBuilder&gt;\l+ userDetailsService(T) : DaoAuthenticationConfigurer&lt;AuthenticationManagerBuilder, T&gt; &lt;T extends UserDetailsService&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		ChannelSecurityConfigurer [label = "{<f0>ChannelSecurityConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;|||{{<f30>ChannelRequestMatcherRegistry|<f31>|<f32>+ and() : H\l}}|{{<f40>RequiresChannelUrl|<f41>+ requestMatchers : List&lt;RequestMatcher&gt;\l|<f42>+ requiresInsecure() : ChannelRequestMatcherRegistry\l+ requiresSecure() : ChannelRequestMatcherRegistry\l}}}", style = "rounded, filled", fillcolor = "springgreen"];
+		CsrfConfigurer [label = "{<f0>CsrfConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||<f2>&#186; configure() : B\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		DefaultLoginPageConfigurer [label = "{<f0>DefaultLoginPageConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		// ExceptionHandlingConfigurer [label = "{<f0>ExceptionHandlingConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		ExpressionUrlAuthorizationConfigurer [label = "{<f0>ExpressionUrlAuthorizationConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;|<f1>+ REGISTRY : ExpressionInterceptUrlRegistry\l||{{<f30>ExpressionInterceptUrlRegistry|<f31>|<f32>+ and() : H\l&#186; chainRequestMatchersInternal(List&lt;RequestMatcher&gt;) : AuthorizedUrl\l}}|{{<f40>AuthorizedUrl|<f41>+ requestMatchers : List&lt;RequestMatcher&gt;\l|<f42>+ access(attribute) : ExpressionInterceptUrlRegistry\l+ authenticated() : ExpressionInterceptUrlRegistry\l+ anonymous() : ExpressionInterceptUrlRegistry\l+ denyAll() : ExpressionInterceptUrlRegistry\l+ fullyAuthenticated() : ExpressionInterceptUrlRegistry\l+ hasAnyAuthority(String...) : ExpressionInterceptUrlRegistry\l+ hasAnyRole(String...) : ExpressionInterceptUrlRegistry\l+ hasAuthority(String) : ExpressionInterceptUrlRegistry\l+ hasIpAddress(String) : ExpressionInterceptUrlRegistry\l+ hasRole(String) : ExpressionInterceptUrlRegistry\l+ not() : AuthorizedUrl\l+ permitAll() : ExpressionInterceptUrlRegistry\l+ rememberMe() : ExpressionInterceptUrlRegistry\l}}}", style = "rounded, filled", fillcolor = "springgreen"];
+		FormLoginConfigurer [label = "{<f0>FormLoginConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||<f2>&#186; init() : B\l&#186; loginPage(String) : T\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		// HeadersConfigurer [label = "{<f0>HeadersConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		HttpBasicConfigurer [label = "{<f0>HttpBasicConfigurer&lt;B extends HttpSecurityBuilder&lt;B&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		HttpSecurity [label = "{<f0>HttpSecurity||<f2>+ authorizeRequests() : ExpressionUrlAuthorizationConfigurer&lt;HttpSecurity&gt;.ExpressionInterceptUrlRegistry\l&#186; beforeConfigure() : void\l+ csrf() : CsrfConfigurer&lt;HttpSecurity&gt;\l+ formLogin() : FormLoginConfigurer&lt;HttpSecurity&gt;\l+ rememberMe() : RememberMeConfigurer&lt;HttpSecurity&gt;\l+ requiresChannel() : ChannelSecurityConfigurer&lt;HttpSecurity&gt;.ChannelRequestMatcherRegistry\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		HttpSecurityBuilder [label = "{<f0>HttpSecurityBuilder&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		InMemoryUserDetailsManagerConfigurer [label = "{<f0>InMemoryUserDetailsManagerConfigurer&lt;B extends ProviderManagerBuilder&lt;B&gt;&gt;||<f2>+ InMemoryUserDetailsManagerConfigurer()\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		JdbcUserDetailsManagerConfigurer [label = "{<f0>JdbcUserDetailsManagerConfigurer&lt;B extends ProviderManagerBuilder&lt;B&gt;&gt;|<f1>+ dataSource : DataSource\l|<f2>+ JdbcUserDetailsManagerConfigurer()\l+ authoritiesByUsernameQuery(String) : JdbcUserDetailsManagerConfigurer&lt;B&gt;\l+ dataSource(DataSource) : JdbcUserDetailsManagerConfigurer&lt;B&gt;\l&#186; getUserDetailsService() : JdbcUserDetailsManager\l+ groupAuthoritiesByUsername(String) : JdbcUserDetailsManagerConfigurer&lt;B&gt;\l+ usersByUsernameQuery(String) : JdbcUserDetailsManagerConfigurer&lt;B&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		LdapAuthenticationProviderConfigurer [label = "{<f0>LdapAuthenticationProviderConfigurer&lt;B extends ProviderManagerBuilder&lt;B&gt;&gt;|<f1>+ groupSearchBase : String\l+ groupSearchFilter : String\l+ passwordAttribute : String\l+ passwordEncoder : PasswordEncoder\l+ userSearchBase : String\l+ userSearchFilter : String\l|<f2>+ groupSearchBase(String) : LdapAuthenticationProviderConfigurer&lt;B&gt;\l+ groupSearchFilter(String) : LdapAuthenticationProviderConfigurer&lt;B&gt;\l+ passwordCompare() : PasswordCompareConfigurer\l+ userSearchBase(String) : LdapAuthenticationProviderConfigurer&lt;B&gt;\l+ userSearchFilter(String) : LdapAuthenticationProviderConfigurer&lt;B&gt;\l|{{<f30>ContextSourceBuilder||<f42>+ ldif(String) : ContextSourceBuilder\l+ root(String) : ContextSourceBuilder\l+ url(String) : ContextSourceBuilder\l}}|{{<f40>PasswordCompareConfigurer||<f42>+ passwordAttribute(String) : PasswordCompareConfigurer\l+ passwordEncoder(String) : PasswordCompareConfigurer\l}}}", style = "rounded, filled", fillcolor = "springgreen"];
+		// LogoutConfigurer [label = "{<f0>LogoutConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		ProviderManagerBuilder [label = "{<f0>ProviderManagerBuilder|<f2>+ authenticationProvider(AuthenticationProvider) : B\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		RememberMeConfigurer [label = "{<f0>RememberMeConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||<f2>+ key(String) : RememberMeConfigurer&lt;H&gt;\l+ tokenValiditySeconds(int) : RememberMeConfigurer&lt;H&gt;\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		// RequestCacheConfigurer [label = "{<f0>RequestCacheConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		SecurityBuilder [label = "{<f0>SecurityBuilder&lt;O&gt;|<f2>+ build() : O\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		SecurityConfigurer [label = "{<f0>SecurityConfigurer&lt;O, B extends SecurityBuilder&lt;O&gt;&gt;|<f2>+ configure(B) : void\l+ init(B) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		SecurityConfigurerAdapter [label = "{<f0>SecurityConfigurerAdapter&lt;O,B extends SecurityBuilder&lt;O&gt;&gt;|<f1>+ securityBuilder : B\l|<f2>+ and() : B\l+ configure() : B\l+ init() : B\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		// SecurityContextConfigurer [label = "{<f0>SecurityContextConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		// ServletApiConfigurer [label = "{<f0>ServletApiConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		// SessionManagementConfigurer [label = "{<f0>SessionManagementConfigurer&lt;H extends HttpSecurityBuilder&lt;H&gt;&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		UserDetailsAwareConfigurer [label = "{<f0>UserDetailsAwareConfigurer&lt;B extends ProviderManagerBuilder&lt;B&gt;, U extends UserDetailsService&gt;||<f2>&#170; getUserDetailsService() : U\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		UserDetailsManagerConfigurer [label = "{<f0>UserDetailsManagerConfigurer&lt;B extends ProviderManagerBuilder&lt;B&gt;, C extends UserDetailsManagerConfigurer&lt;B,C&gt;&gt;||<f2>+ UserDetailsManagerConfigurer(UserDetailsManager)\l+ withUser(String) : UserDetailsBuilder\l|{{<f30>UserDetailsBuilder|<f31>+ authorities : List&lt;GrantedAuthority&gt;\l+ builder : C\l+ password : String\l+ username : String\l|<f32>+ and() : C\l+ authorities(GrantedAuthority...) : UserDetailsBuilder\l+ authorities(List&lt;? extends GrantedAuthority&gt;) : UserDetailsBuilder\l+ authorities(String...) : UserDetailsBuilder\l+ password(String) : UserDetailsBuilder\l+ roles(String...) : UserDetailsBuilder\l}}}", style = "rounded, filled", fillcolor = "springgreen"];		
+		UserDetailsServiceConfigurer [label = "{<f0>UserDetailsServiceConfigurer&lt;B extends ProviderManagerBuilder&lt;B&gt;, C extends UserDetailsServiceConfigurer&lt;B, C, U&gt;, U extends UserDetailsService&gt;||}", style = "rounded, filled", fillcolor = "springgreen"];
+		UsernamePasswordAuthenticationFilter [label = "{<f0>UsernamePasswordAuthenticationFilter||}", style = "rounded, filled", fillcolor = "springgreen"];
+		WebSecurity [label = "{<f0>WebSecurity||}", style = "rounded, filled", fillcolor = "springgreen"];
+		WebSecurityConfiguration [label = "{<f0>WebSecurityConfiguration|<f1>+ webSecurity : WebSecurity\l+ webSecurityConfigurers : List&lt;SecurityConfigurer&lt;Filter, WebSecurity&gt;&gt;\l|<f2>+ springSecurityFilterChain() : Filter\l}", style = "rounded, filled", fillcolor = "springgreen"];
+		WebSecurityConfigurer [label = "{<f0>WebSecurityConfigurer&lt;T extends SecurityBuilder&lt;Filter&gt;&gt;|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		WebSecurityConfigurerAdapter [label = "{<f0>WebSecurityConfigurerAdapter|<f1>+ authenticationManager : AuthenticationManager\l+ http : HttpSecurity\l|<f2>+ authenticationManager() : AuthenticationManagerBuilder\l+ configure(AuthenticationManagerBuilder) : void\l&#186; configure(WebSecurity) : void\l+ configure(HttpSecurity) : void\l&#186; init(B) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	}
+
+	subgraph cluster70 {
+		label = "security-core";
+		style = filled;
+		color = grey90;
+		AbstractUserDetailsAuthenticationProvider [label = "{<f0>AbstractUserDetailsAuthenticationProvider||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AuthenticationManager [label = "{<f0>AuthenticationManager|<f2>+ authenticate() : Authentication\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		AuthenticationProvider [label = "{<f0>AuthenticationProvider|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		CredentialsContainer [label = "{<f0>CredentialsContainer|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		DaoAuthenticationProvider [label = "{<f0>DaoAuthenticationProvider|<f1>+ passwordEncoder : PasswordEncoder\l+ userDetailsService : UserDetailsService\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		GroupManager [label = "{<f0>GroupManager|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		InMemoryUserDetailsManager [label = "{<f0>InMemoryUserDetailsManager||}", style = "rounded, filled", fillcolor = "springgreen"];
+		JdbcDaoImpl [label = "{<f0>JdbcDaoImpl||}", style = "rounded, filled", fillcolor = "springgreen"];
+		JdbcUserDetailsManager [label = "{<f0>JdbcUserDetailsManager||}", style = "rounded, filled", fillcolor = "springgreen"];
+		PasswordEncoder [label = "{<f0>PasswordEncoder|<f2>+ encode(CharSequence) : String\l+ matches(CharSequence, String) : boolean\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		User [label = "{<f0>User||}", style = "rounded, filled", fillcolor = "springgreen"];
+		UserDetails [label = "{<f0>UserDetails|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		UserDetailsManager [label = "{<f0>UserDetailsManager|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		UserDetailsService [label = "{<f0>UserDetailsService|<f2>+ loadUserByUsername(String) : UserDetails\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}
+
+	subgraph cluster71 {
+		label = "security-ldap";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster72 {
+		label = "security-openid";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster73 {
+		label = "security-taglibs";
+		style = filled;
+		color = grey90;
+	}
+
+	subgraph cluster74 {
+		label = "security-web";
+		style = filled;
+		color = grey90;
+		AbstractSecurityWebApplicationInitializer [label = "{<f0>AbstractSecurityWebApplicationInitializer||<f2>&#170; onStartup(ServletContext) : void\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		AuthenticationEntryPoint [label = "{<f0>AuthenticationEntryPoint|}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+		LoginUrlAuthenticationEntryPoint [label = "{<f0>LoginUrlAuthenticationEntryPoint|<f1>+ loginFormUrl : String\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+	}
+	
+	subgraph cluster83 {
+		label = "web";
+		style = filled;
+		color = grey90;
+		DelegatingFilterProxy [label = "{<f0>DelegatingFilterProxy|<f1>+ targetBeanName : String\l+ webApplicationContext : WebApplicationContext\l|}", style = "rounded, filled", fillcolor = "springgreen"];
+		GenericFilterBean [label = "{<f0>GenericFilterBean||}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+		WebApplicationInitializer [label = "{<f0>WebApplicationInitializer|<f2>+ onStartup(ServletContext) : void\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	}		
+
+	
+	// interface_minor [shape = "plaintext", label = "Interface_minor"];
+	// interface [label = "{<f0>Interface|<f2>+ method() : return_type\l}", style = "rounded, filled", fillcolor = "mediumpurple1"];
+	// abstract_class [label = "{<f0>Abstract_Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>&#170; abstract_method() : return_type\l&#537; static_method() : return_type\l+ method() : return_type\l}", style = "rounded, filled, dashed", fillcolor = "springgreen"];
+	// class [label = "{<f0>Class|<f1>+ field1 : type\l+ filed2 : type\l|<f2>+ method() : return_type\l&#537; static_method() : return_type\l&#186; overriden_method() : return_type\l}", style = "rounded, filled", fillcolor = "springgreen"];
+
+	
+	// Implementation -> Interface [arrowhead = "empty"];
+	// Subclass -> Class;	
+	// Referer -> Referee [arrowhead = "vee"];
+	// Implementation -> InterfaceMinor [arrowhead = "odot"];
+	
+	// initializers
+	AbstractSecurityWebApplicationInitializer -> WebApplicationInitializer [arrowhead = "empty"];
+	AbstractSecurityWebApplicationInitializer:f2 -> DelegatingFilterProxy [arrowhead = "vee"];
+	
+	// spring configurations
+	WebSecurityConfiguration:f1 -> WebSecurity [arrowhead = "vee"];
+	WebSecurity -> AbstractConfiguredSecurityBuilder [label = "O = Filter\nB = WebSecurity"];
+	AbstractConfiguredSecurityBuilder -> AbstractSecurityBuilder;
+	AbstractConfiguredSecurityBuilder:f1 -> SecurityConfigurer [arrowhead = "vee"];
+	AbstractSecurityBuilder -> SecurityBuilder [arrowhead = "empty"];
+	WebSecurity -> SecurityBuilder [arrowhead = "empty", label = "O = Filter"];
+	WebSecurityConfiguration:f1 -> SecurityConfigurer [arrowhead = "vee"];
+	SecurityConfigurer:f0 -> SecurityBuilder [arrowhead = "vee"];
+	
+	// web configurers
+	WebSecurityConfigurerAdapter -> WebSecurityConfigurer [arrowhead = "empty", label = "T = WebSecurity"];
+	WebSecurityConfigurer -> SecurityConfigurer [label = "O = Filter\nB = T"];
+	WebSecurityConfigurerAdapter:f1 -> HttpSecurity [arrowhead = "vee"];
+	HttpSecurity -> AbstractConfiguredSecurityBuilder [label = "O = DefaultSecurityFilterChain\nB = HttpSecurity"];
+	HttpSecurity -> SecurityBuilder [arrowhead = "empty", label = "O = DefaultSecurityFilterChain"];
+	HttpSecurity -> HttpSecurityBuilder [arrowhead = "empty", label = "H = HttpSecurity"];
+	HttpSecurityBuilder -> SecurityBuilder [label = "O = DefaultSecurityFilterChain"];
+	HttpSecurity:f2 -> ExpressionUrlAuthorizationConfigurer:f30 [arrowhead = "vee", label = "H = HttpSecurity"];
+	ExpressionUrlAuthorizationConfigurer -> AbstractInterceptUrlConfigurer [label = "C = ExpressionUrlAuthorizationConfigurer&lt;H&gt;"];
+	ExpressionUrlAuthorizationConfigurer:f30 -> AbstractInterceptUrlConfigurer:f30 [label = "R = ExpressionInterceptUrlRegistry\nT = AuthorizedUrl"];
+	AbstractInterceptUrlConfigurer:f30 -> AbstractConfigAttributeRequestMatcherRegistry [label = "C = T"];
+	AbstractConfigAttributeRequestMatcherRegistry -> AbstractRequestMatcherRegistry;
+	AbstractInterceptUrlConfigurer -> AbstractHttpConfigurer [label = "T = C\nB = H"];
+	AbstractHttpConfigurer -> SecurityConfigurerAdapter [label = "O = DefaultSecurityFilterChain"];
+	SecurityConfigurerAdapter -> SecurityConfigurer [arrowhead = "empty"];
+	// ExceptionHandlingConfigurer -> AbstractHttpConfigurer [label = "T = ExceptionHandlingConfigurer&lt;H&gt;\nB = H"];
+	HttpSecurity:f2 -> FormLoginConfigurer [arrowhead = "vee", label = "H = HttpSecurity"];
+	FormLoginConfigurer -> AbstractAuthenticationFilterConfigurer [label = "B = H\nT = FormLoginConfigurer&lt;H&gt;\nF = UsernamePasswordAuthenticationFilter"];
+	AbstractAuthenticationFilterConfigurer -> AbstractHttpConfigurer;
+	AbstractAuthenticationFilterConfigurer:f0 -> AbstractAuthenticationProcessingFilter [arrowhead = "vee"];
+	UsernamePasswordAuthenticationFilter -> AbstractAuthenticationProcessingFilter;
+	AbstractAuthenticationProcessingFilter -> GenericFilterBean;
+	AbstractAuthenticationFilterConfigurer:f1 -> LoginUrlAuthenticationEntryPoint [arrowhead = "vee"];
+	LoginUrlAuthenticationEntryPoint -> AuthenticationEntryPoint [arrowhead = "empty"];
+	HttpBasicConfigurer -> AbstractHttpConfigurer [label = "T = HttpBasicConfigurer&lt;B&gt;"];
+	// HeadersConfigurer -> AbstractHttpConfigurer [label = "T = HeadersConfigurer&lt;H&gt;\nB = H"];
+	// SessionManagementConfigurer -> AbstractHttpConfigurer [label = "T = SessionManagementConfigurer&lt;H&gt;\nB = H"];
+	// SecurityContextConfigurer -> AbstractHttpConfigurer [label = "T = SecurityContextConfigurer&lt;H&gt;\nB = H"];
+	// RequestCacheConfigurer -> AbstractHttpConfigurer [label = "T = RequestCacheConfigurer&lt;H&gt;\nB = H"];
+	// AnonymousConfigurer -> AbstractHttpConfigurer [label = "T = AnonymousConfigurer&lt;H&gt;\nB = H"];
+	// ServletApiConfigurer -> AbstractHttpConfigurer [label = "T = ServletApiConfigurer&lt;H&gt;\nB = H"];
+	// LogoutConfigurer -> AbstractHttpConfigurer [label = "T = LogoutConfigurer&lt;H&gt;\nB = H"];
+	HttpSecurity:f2 -> ChannelSecurityConfigurer:f30 [arrowhead = "vee", label = "H = HttpSecurity"];
+	ChannelSecurityConfigurer -> AbstractHttpConfigurer [label = "T = ChannelSecurityConfigurer&lt;H&gt;\nB = H"];
+	ChannelSecurityConfigurer:f30 -> AbstractConfigAttributeRequestMatcherRegistry [label = "C = RequiresChannelUrl"];
+	HttpSecurity:f2 -> CsrfConfigurer [arrowhead = "vee", label = "H = HttpSecurity"];
+	CsrfConfigurer -> AbstractHttpConfigurer [label = "T = CsrfConfigurer&lt;H&gt;\nB = H"];
+	HttpSecurity:f2 -> RememberMeConfigurer [arrowhead = "vee", label = "H = HttpSecurity"];
+	RememberMeConfigurer -> AbstractHttpConfigurer [label = "T = RememberMeConfigurer&lt;H&gt;\nB = H"];
+	WebSecurityConfigurerAdapter:f1 -> AuthenticationManager [arrowhead = "vee"];
+	WebSecurityConfigurerAdapter:f2 -> AuthenticationManagerBuilder [arrowhead = "vee"];
+	AuthenticationManagerBuilder -> ProviderManagerBuilder [arrowhead = "empty", label = "B = AuthenticationManagerBuilder"];
+	ProviderManagerBuilder -> SecurityBuilder [label = "O = AuthenticationManager"];
+	AuthenticationManagerBuilder -> AbstractConfiguredSecurityBuilder [label = "O = AuthenticationManager\nB = AuthenticationManagerBuilder"];
+	AuthenticationManagerBuilder:f2 -> InMemoryUserDetailsManagerConfigurer [arrowhead = "vee", label = "B = AuthenticationManagerBuilder"];
+	InMemoryUserDetailsManagerConfigurer -> UserDetailsManagerConfigurer [label = "C = InMemoryUserDetailsManagerConfigurer&lt;B&gt;"]
+	UserDetailsManagerConfigurer -> UserDetailsServiceConfigurer [label = "U = UserDetailsManager"];
+	UserDetailsServiceConfigurer -> AbstractDaoAuthenticationConfigurer;
+	AbstractDaoAuthenticationConfigurer -> UserDetailsAwareConfigurer;
+	UserDetailsAwareConfigurer -> SecurityConfigurerAdapter [label = "O = AuthenticationManager"];
+	UserDetailsAwareConfigurer:f0 -> UserDetailsService [arrowhead = "vee"];
+	UserDetailsService:f2 -> UserDetails [arrowhead = "vee"];
+	User -> UserDetails [arrowhead = "empty"];
+	User -> CredentialsContainer [arrowhead = "empty"];
+	AbstractDaoAuthenticationConfigurer:f1 -> DaoAuthenticationProvider [arrowhead = "vee"];
+	DaoAuthenticationProvider -> AbstractUserDetailsAuthenticationProvider;
+	AbstractUserDetailsAuthenticationProvider -> AuthenticationProvider [arrowhead = "empty"];
+	DaoAuthenticationProvider:f1 -> UserDetailsService [arrowhead = "vee"];
+	DaoAuthenticationProvider:f1 -> PasswordEncoder [arrowhead = "vee"];
+	UserDetailsManagerConfigurer:f2 -> UserDetailsManager [arrowhead = "vee"];
+	UserDetailsManager -> UserDetailsService;
+	InMemoryUserDetailsManagerConfigurer:f2 -> InMemoryUserDetailsManager [arrowhead = "vee"];
+	InMemoryUserDetailsManager -> UserDetailsManager [arrowhead = "empty"];
+	AuthenticationManagerBuilder:f2 -> JdbcUserDetailsManagerConfigurer [arrowhead = "vee", label = "B = AuthenticationManagerBuilder"];
+	JdbcUserDetailsManagerConfigurer -> UserDetailsManagerConfigurer [label = "C = JdbcUserDetailsManagerConfigurer&lt;B&gt;"]
+	JdbcUserDetailsManagerConfigurer:f2 -> JdbcUserDetailsManager;
+	JdbcUserDetailsManager -> UserDetailsManager [arrowhead = "empty"];
+	JdbcUserDetailsManager -> GroupManager [arrowhead = "empty"];
+	JdbcUserDetailsManager -> JdbcDaoImpl;
+	JdbcDaoImpl -> UserDetailsService [arrowhead = "empty"];
+	JdbcDaoImpl -> JdbcDaoSupport;
+	AuthenticationManagerBuilder:f2 -> LdapAuthenticationProviderConfigurer [arrowhead = "vee", label = "B = AuthenticationManagerBuilder"];
+	LdapAuthenticationProviderConfigurer -> SecurityConfigurerAdapter [label = "O = AuthenticationManager"];
+	WebSecurityConfigurerAdapter:f2 -> DefaultLoginPageConfigurer [arrowhead = "vee", label = "H = HttpSecurity"];
+	DefaultLoginPageConfigurer -> AbstractHttpConfigurer [label = "T = DefaultLoginPageConfigurer&lt;H&gt;\nB = H"];
+	
+	
+	// current is current_progress_item
+}
